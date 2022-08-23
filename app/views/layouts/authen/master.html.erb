@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mini Project Rails</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
+      <div class="container">
+          <%= link_to image_tag("gb.png", class: "icon-flag"), locale:"en" %>
+          <%= link_to image_tag("vn.png", class: "icon-flag"), locale:"vi" %>
+          <%= link_to "Post vote", "/login", class: "navbar-brand post-vote" %>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                      <%= link_to t('master.login'), "/login", class: "navbar-brand" %>
+                  </li>
+                  <li class="nav-item">
+                      <%= link_to t('master.register'), "/register", class: "navbar-brand" %>
+                  </li>
+                  <li class="nav-item">
+                      <%= link_to t('master.logout'), "/logout", class: "navbar-brand" %>
+                  </li>
+              </ul>
+          </div>
+      </div>
+    </nav>
+
+    <%= yield :login %>
+    <%= yield :register %> 
+    <%= yield :change_password %> 
+    <%= yield :forgot_password %> 
+
+  </body>
+</html>

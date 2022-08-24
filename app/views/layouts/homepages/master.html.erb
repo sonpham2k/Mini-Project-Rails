@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home Page</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'homepage', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'homepage', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <div class="page-wrapper chiller-theme toggled">
+      <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+        <i class="fas fa-bars"></i>
+      </a>
+      
+      <%# navbar %>
+      <%= render 'layouts/homepages/navbar' %>
+
+      <main class="page-content">
+        <%= yield :content %>
+      </main>
+    </div>
+  </body>
+</html>

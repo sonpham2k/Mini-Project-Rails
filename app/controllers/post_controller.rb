@@ -1,4 +1,4 @@
-class HomepageController < ActionController::Base
+class PostController < ActionController::Base
     layout 'homepages/master'
 
     before_action :set_locale
@@ -7,10 +7,28 @@ class HomepageController < ActionController::Base
         {locale: I18n.locale}
     end
 
-    def dashboard
-        render 'resources/homepages/dashboard'
+    def create
+        render 'resources/posts/new'
     end
-    
+
+    def edit
+        render 'resources/posts/edit'
+    end
+
+    def update
+    end
+
+    def destroy
+    end
+
+    def index
+        render 'resources/posts/index'
+    end
+
+    def show
+        render 'resources/posts/show'
+    end
+
     private
         def set_locale
             I18n.locale = params[:locale] || I18n.default_locale

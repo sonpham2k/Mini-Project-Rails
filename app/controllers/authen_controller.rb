@@ -1,5 +1,5 @@
 class AuthenController < ActionController::Base
-    layout "authen/master"
+    layout :resolve_layout
 
     before_action :set_locale
 
@@ -12,15 +12,15 @@ class AuthenController < ActionController::Base
     end
 
     def register
-        render "resources/authen/register"
+        render 'resources/authen/register'
     end
 
     def forgot_password
-        render "resources/authen/forgot_password"
+        render 'resources/authen/forgot_password'
     end
 
-    def change_password
-        render "resources/authen/change_password"
+    def change_forgot_password
+        render 'resources/authen/change_forgot_password'
     end
 
     private
@@ -32,5 +32,14 @@ class AuthenController < ActionController::Base
             locale = params[:locale].to_s.strip.to_sym
             I18n.locale = I18n.available_locales.include?(locale) ?
                 locale : I18n.default_locale
+        end
+
+        def resolve_layout
+            case action_name
+            when 'login', 'logout', 'register', 'forgot_password', 'change_forgot_password'
+              'authen/master'
+            else
+              'homepages/master'
+            end
         end
 end

@@ -1,3 +1,84 @@
 <% content_for :content do %>
-    <div style="text-align: center">List users</div>
+    <div class="title">List Users</div>
+    <%= form_with do |form| %>
+      <div class="main">
+          <div class="input-group"> 
+            <%# Search %>
+            <%= form.text_field :username, :class => "form-control", :placeholder => "Search by title" %>
+            <div class="input-group-append">
+              <%= form.button "Save", :class => "btn btn-primary" do %>
+                <i class="fa fa-search"></i>
+              <% end %>
+            </div>
+          </div>
+      </div>
+    <% end %>
+
+    <div class="main-container table-responsive py-5"> 
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col" class="size-column">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Mark@gmail.com</td>
+                    <td>
+                        <%= link_to "Edit", nil, { :class => "edit", "data-toggle" => "modal", "data-target" => "#edit-user"} %>
+                        <%= link_to  "Delete", "#", :class => "delete" %>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Modal edit user-->
+    <div class="modal fade" id="edit-user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <%= form_with do |form| %>
+                <%# Username %>
+                <div class="form-group row">
+                    <%= form.label :username, "Username: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
+                    <div class="col-md-6">
+                        <%= form.text_field :username, :class => "form-control" %>
+                    </div>
+                </div>
+
+                <%# Email %>
+                <div class="form-group row">
+                    <%= form.label :email, "Email: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
+                    <div class="col-md-6">
+                        <%= form.text_field :email, :class => "form-control" %>
+                    </div>
+                </div>
+
+                <%# Role %>
+                <div class="form-group row">
+                    <%= form.label :role, "Role: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
+                    <div class="col-md-6">
+                        <%= form.text_field :confirm_password, :class => "form-control", :disabled => true %>
+                    </div>
+                </div>
+
+                <%# Save %>
+                <div class="col-md-6 offset-md-4">
+                    <%= form.button "Save", :class => "btn btn-primary" %>
+                </div>
+            <% end %>
+        </div>
+      </div>
+    </div>
 <% end %>

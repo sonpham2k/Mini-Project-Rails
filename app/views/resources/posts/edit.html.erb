@@ -1,3 +1,63 @@
 <% content_for :content do %>
-    <div style="text-align: center">Edit post</div>
+  <div class="title">Edit Post</div>
+  <div class="cotainer">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-body">
+            <%= form_with do |form| %>
+                <% # Title %>
+                <div class="answer">Title post</div>
+                <div class="form-group row">
+                    <%= form.label :title_post, :class => "col-md-4 col-form-label text-md-right" %>
+                    <div class="col-md-6">
+                        <%= form.text_area :title_post, :class => "form-control" %>
+                    </div>
+                </div>
+
+                <%# Answer %>
+                <div class="answer">Answer</div>
+
+                <%# A %>
+                <div class="form-group row">
+                    <%= form.label :answer_a, "A: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
+                    <div class="col-md-6">
+                        <%= form.text_area :answer_a, :class => "form-control" %>
+                    </div>
+                </div>
+
+                <%# B %>
+                <div class="form-group row">
+                    <%= form.label :answer_b, "B: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
+                    <div class="col-md-6">
+                        <%= form.text_area :answer_b, :class => "form-control" %>
+                    </div>
+                </div>
+
+                <%# C %>
+                <div class="form-group row">
+                    <%= form.label :answer_c, "C: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
+                    <div class="col-md-6">
+                        <%= form.text_area :answer_c, :class => "form-control" %>
+                    </div>
+                </div>
+
+                <%# D %>
+                <div class="form-group row">
+                    <%= form.label :answer_D, "D: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
+                    <div class="col-md-6">
+                        <%= form.text_area :answer_d, :class => "form-control" %>
+                    </div>
+                </div>
+
+                <%# Edit post %>
+                <div class="col-md-6 offset-md-4">
+                    <%= form.button "Submit", :class => "btn btn-primary" %>
+                </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>

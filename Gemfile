@@ -5,11 +5,19 @@ ruby '2.7.0'
 
 # bootstrap
 gem 'bootstrap', '~> 4.0'
+
+#font-awesome
+gem 'font-awesome-sass', '~> 4.4.0'
 # jquery
 gem 'jquery-rails'
 gem 'rails-ujs', '~> 0.1.0'
 gem 'popper'
-
+#mysql
+gem 'mysql2'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 5.2.8', '>= 5.2.8.1'
+# Use sqlite3 as the database for Active Record
+gem 'sqlite3'
 gem 'bootstrap-sass', '3.4.1'
 gem 'bcrypt', '3.1.13'
 #faker
@@ -17,11 +25,6 @@ gem 'faker', '2.1.2'
 #pagination
 gem 'will_paginate', '3.1.8'
 gem 'bootstrap-will_paginate', '1.0.0'
-
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.8', '>= 5.2.8.1'
-# Use mysql as the database for Active Record
-gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets

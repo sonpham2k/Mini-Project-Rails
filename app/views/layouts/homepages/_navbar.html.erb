@@ -1,78 +1,98 @@
 <nav id="border" class="navbar-nav">
-    <%= link_to image_tag("gb.png", class: "icon-flag navbar-nav ml-auto"), locale: "en" %>
-    <%= link_to image_tag("vn.png", class: "icon-flag navbar-nav ml-auto"), locale: "vi" %>
+    <div>
+        <%= link_to image_tag("vn.png", class: "icon-flag navbar-nav ml-auto"), locale: "vi" %>
+        <%= link_to image_tag("gb.png", class: "icon-flag navbar-nav ml-auto"), locale: "en" %>
+    </div>
 </nav>
 <nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-content">
         <div class="sidebar-brand">
-        <a href="#">
-            <span class="user-name">
-                <b>POST VOTE</b>
-            </span>
-        </a>
-        <div id="close-sidebar">
-        </div>
+            <%= link_to("#") do %>
+                <span class="user-name">
+                    <b>POST VOTE</b>
+                </span>
+            <% end %>
         </div>
         <div class="sidebar-header">
-        <div class="user-info">
-            <span class="user-name">
-                <strong>User: Ngoc Son</strong>
-            </span>
-            <span class="user-name">
-                <strong>Role: Admin</strong>
-            </span>
-        </div>
+            <div class="user-info">
+                <span class="user-name">
+                    <strong>User: Ngoc Son</strong>
+                </span>
+                <span class="user-name">
+                    <strong>Role: Admin</strong>
+                </span>
+            </div>
         </div>
         <div class="sidebar-menu">
-        <ul>
-            <li class="header-menu">
-                <span>General</span>
-            </li>
-            <li class="sidebar-dropdown">
-            <a href="/homepages/">
-                <i class="fa fa-tachometer-alt"></i>
-                <span>Dashboard</span>
-            </a>
-            </li>
-            <li class="sidebar-dropdown">
-            <a href="/homepages/posts/index">
-                <i class="fa fa-shopping-cart"></i>
-                <span>List post</span>
-            </a>
-            </li>
-            <li class="sidebar-dropdown">
-            <a href="/homepages/posts/new">
-                <i class="fa fa-shopping-cart"></i>
-                <span>Add post</span>
-            </a>
-            </li>
-            <li class="sidebar-dropdown">
-            <a href="/homepages/posts/edit">
-                <i class="fa fa-shopping-cart"></i>
-                <span>Edit post</span>
-            </a>
-            </li>
-            <li class="header-menu">
-            <span>Setting</span>
-            </li>
-            <li class="sidebar-dropdown">
-            <a href="/homepages/users/show">
-                <i class="fa fa-tachometer-alt"></i>
-                <span>Profile</span>
-            </a>
-            </li>
-            <li class="sidebar-dropdown">
-            <a href="/homepages/users/change-password">
-                <i class="fa fa-shopping-cart"></i>
-                <span>Change Password</span>
-            </a>
-            </li>
-            <li class="sidebar-dropdown">
-            <a href="#">
-                <i class="fa fa-shopping-cart"></i>
-                <span>Sign Out</span>
-            </a>
-            </li>
-        </ul>
+            <ul>
+                <% # General %>
+                <li class="header-menu">
+                    <span>General</span>
+                </li>
+                <li class="sidebar-dropdown">
+                    <%= link_to("/homepages/dashboard") do %>
+                        <i class="fa fa-tachometer"></i>
+                        <span>Dashboard</span>
+                    <% end %>
+                </li>
+
+                <% # User %>
+                <li class="header-menu">
+                    <span>User</span>
+                </li>
+                <li class="sidebar-dropdown">
+                    <%= link_to("/homepages/users/index") do %>
+                        <i class="fa fa-users"></i>
+                        <span>List User</span>
+                    <% end %>
+                </li>
+
+                <% # Post %>
+                <li class="header-menu">
+                    <span>Post</span>
+                </li>
+                <li class="sidebar-dropdown">
+                    <%= link_to("/homepages/posts/index") do %>
+                        <i class="fa fa-list"></i>
+                        <span>List post</span>
+                    <% end %>
+                </li>
+                <li class="sidebar-dropdown">
+                    <%= link_to("/homepages/posts/new") do %>
+                        <i class="fa fa-plus-circle"></i>
+                        <span>Add post</span>
+                    <% end %>
+                </li>
+                <li class="sidebar-dropdown">
+                    <%= link_to("/homepages/posts/edit") do %>
+                        <i class="fa fa-pencil"></i>
+                        <span>Edit post</span>
+                    <% end %>
+                </li>
+
+                <% # Setting %>
+                <li class="header-menu">
+                    <span>Setting</span>
+                </li>
+                <li class="sidebar-dropdown">
+                    <%= link_to("/homepages/users/edit") do %>
+                        <i class="fa fa-user"></i>
+                        <span>Profile</span>
+                    <% end %>
+                </li>
+                <li class="sidebar-dropdown">
+                    <%= link_to("/homepages/users/change-password") do %>
+                        <i class="fa fa-shopping-cart"></i>
+                        <span>Change Password</span>
+                    <% end %>
+                </li>
+                <li class="sidebar-dropdown">
+                    <%= link_to("#") do %>
+                        <i class="fa fa-sign-out"></i>
+                        <span>Sign Out</span>
+                    <% end %>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>

@@ -22,7 +22,7 @@ class UserController < ActionController::Base
     end
 
     def index
-        render 'resources/users/list'
+        render 'resources/users/index'
     end
 
     def show

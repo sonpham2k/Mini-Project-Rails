@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     get '/change-password', to: 'authen#change_forgot_password'
 
     scope(:path => '/homepages') do
-      get '/', to: 'homepage#dashboard'
+      get '/dashboard', to: 'homepage#dashboard'
 
       scope(:path => '/posts') do
         get '/index', to: 'post#index'
@@ -24,6 +24,5 @@ Rails.application.routes.draw do
       end
 
     end
-
   end
 end

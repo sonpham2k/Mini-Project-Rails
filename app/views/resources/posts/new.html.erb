@@ -5,39 +5,56 @@
       <div class="col-md-8">
         <div class="card">
           <div class="card-body">
-            <form action="" method="">
-              <%# Email %>
-              <div class="form-group row">
-                <label for="email_address" class="col-md-4 col-form-label text-md-right"><%= t('master.email') %></label>
-                <div class="col-md-6">
-                  <input type="text-area" id="email_address" class="form-control" name="email-address" required autofocus>
+          <%= form_with do |form| %>
+                <% # Title %>
+                <div class="answer">Title post</div>
+                <div class="form-group row">
+                    <%= form.label :title_post, :class => "col-md-4 col-form-label text-md-right" %>
+                    <div class="col-md-6">
+                        <%= form.text_area :title_post, :class => "form-control" %>
+                    </div>
                 </div>
-              </div>
-              <%# Password %>
-              <div class="form-group row">
-                <label for="password" class="col-md-4 col-form-label text-md-right"><%= t('master.password') %></label>
-                <div class="col-md-6">
-                  <input type="password" id="password" class="form-control" name="password" required>
+
+                <%# Answer %>
+                <div class="answer">Answer</div>
+
+                <%# A %>
+                <div class="form-group row">
+                    <%= form.label :answer_a, "A: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
+                    <div class="col-md-6">
+                        <%= form.text_area :answer_a, :class => "form-control" %>
+                    </div>
                 </div>
-              </div>
-              <%# Remember me %>
-              <div class="form-group row">
+
+                <%# B %>
+                <div class="form-group row">
+                    <%= form.label :answer_b, "B: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
+                    <div class="col-md-6">
+                        <%= form.text_area :answer_b, :class => "form-control" %>
+                    </div>
+                </div>
+
+                <%# C %>
+                <div class="form-group row">
+                    <%= form.label :answer_c, "C: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
+                    <div class="col-md-6">
+                        <%= form.text_area :answer_c, :class => "form-control" %>
+                    </div>
+                </div>
+
+                <%# D %>
+                <div class="form-group row">
+                    <%= form.label :answer_D, "D: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
+                    <div class="col-md-6">
+                        <%= form.text_area :answer_d, :class => "form-control" %>
+                    </div>
+                </div>
+
+                <%# Edit post %>
                 <div class="col-md-6 offset-md-4">
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox" name="remember"> <%= t('master.remember-me') %>
-                    </label>
-                  </div>
+                    <%= form.button "Submit", :class => "btn btn-primary" %>
                 </div>
-              </div>
-              <%# Login %>
-              <div class="col-md-6 offset-md-4">
-                <button type="submit" class="btn btn-primary">
-                  <%= t('master.login') %>
-                </button>
-                <%= link_to t('master.forgot'), "/forgot-password", class: "btn btn-link" %>
-              </div>
-            </form>
+            <% end %>
           </div>
         </div>
       </div>

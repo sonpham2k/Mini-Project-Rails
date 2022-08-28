@@ -6,20 +6,20 @@
                 <div class="card">
                     <div class="card-header"><%= t('master.login') %></div>
                     <div class="card-body">
-                        <form action="" method="">
+                        <%= form_for :authens, url: login_path do |form| %>
                             <%# Email %>
                             <div class="form-group row">
-                                <label for="email_address" class="col-md-4 col-form-label text-md-right"><%= t('master.email') %></label>
+                                <%= form.label :email_address, "Email: ", :class => "col-md-4 col-form-label text-md-right" %>
                                 <div class="col-md-6">
-                                    <input type="text" id="email_address" class="form-control" name="email-address" required autofocus>
+                                    <%= form.text_field :email_address, :class => "form-control", :required => true %>
                                 </div>
                             </div>
 
                             <%# Password %>
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right"><%= t('master.password') %></label>
+                                <%= form.label :password, "Password: ", :class => "col-md-4 col-form-label text-md-right" %>
                                 <div class="col-md-6">
-                                    <input type="password" id="password" class="form-control" name="password" required>
+                                    <%= form.password_field :password, :class => "form-control", :required => true %>
                                 </div>
                             </div>
 
@@ -27,9 +27,7 @@
                             <div class="form-group row">
                                 <div class="col-md-6 offset-md-4">
                                     <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="remember"> <%= t('master.remember-me') %>
-                                        </label>
+                                        <%# Remember %>
                                     </div>
                                 </div>
                             </div>
@@ -41,7 +39,7 @@
                                 </button>
                                 <%= link_to t('master.forgot'), "/forgot-password", class: "btn btn-link" %>
                             </div>
-                        </form>
+                        <% end %>
                     </div>
                 </div>
             </div>

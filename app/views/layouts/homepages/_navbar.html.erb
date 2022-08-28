@@ -16,10 +16,14 @@
         <div class="sidebar-header">
             <div class="user-info">
                 <span class="user-name">
-                    <strong>User: Ngoc Son</strong>
+                    <strong>User: <%= current_user.name %></strong>
                 </span>
                 <span class="user-name">
-                    <strong>Role: Admin</strong>
+                    <% if current_user.is_admin %>
+                        <strong>Role: Admin</strong>
+                    <% else %>
+                        <strong>Role: User</strong>
+                    <% end %>
                 </span>
             </div>
         </div>
@@ -30,7 +34,7 @@
                     <span>General</span>
                 </li>
                 <li class="sidebar-dropdown">
-                    <%= link_to("/homepages/dashboard") do %>
+                    <%= link_to(user_path(current_user)) do %>
                         <i class="fa fa-tachometer"></i>
                         <span>Dashboard</span>
                     <% end %>
@@ -41,7 +45,7 @@
                     <span>User</span>
                 </li>
                 <li class="sidebar-dropdown">
-                    <%= link_to("/homepages/users/index") do %>
+                    <%= link_to("/users") do %>
                         <i class="fa fa-users"></i>
                         <span>List User</span>
                     <% end %>
@@ -75,7 +79,7 @@
                     <span>Setting</span>
                 </li>
                 <li class="sidebar-dropdown">
-                    <%= link_to("/homepages/users/edit") do %>
+                    <%= link_to(edit_user_path(current_user)) do %>
                         <i class="fa fa-user"></i>
                         <span>Profile</span>
                     <% end %>
@@ -87,7 +91,7 @@
                     <% end %>
                 </li>
                 <li class="sidebar-dropdown">
-                    <%= link_to("#") do %>
+                    <%= link_to (logout_path), method: :delete do %>
                         <i class="fa fa-sign-out"></i>
                         <span>Sign Out</span>
                     <% end %>

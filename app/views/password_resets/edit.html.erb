@@ -6,21 +6,31 @@
                 <div class="card">
                     <div class="card-header"><%= t('master.change-password') %></div>
                     <div class="card-body">
-                        <form action="" method="">
-
+                        <%= form_with(model: @user, method: :post, scope: :user, url: password_resets_update_path, local: true) do |form| %> 
+                            
+                            <% if @user.errors.any? %>
+                                <ul>
+                                    <% @user.errors.full_messages.each do |message| %>
+                                        <li><%= message %></li>
+                                    <% end %>
+                                </ul>
+                            <% end %>
+                            
+                            <%= hidden_field_tag :email, @user.email %>
+                    
                             <%# Password %>
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right"><%= t('master.new-password') %></label>
+                                <%=  form.label :password, 'Password', :class => "col-md-4 col-form-label text-md-right" %>
                                 <div class="col-md-6">
-                                    <input type="password" id="password" class="form-control" name="password" required>
+                                    <%= form.password_field :password, :class => "form-control", :required => true %>
                                 </div>
                             </div>
 
 							<%# Confirm Password %>
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right"><%= t('master.confirm-password') %></label>
+                                <%=  form.label :password_confirmation, 'Confirm Password', :class => "col-md-4 col-form-label text-md-right" %>
                                 <div class="col-md-6">
-                                    <input type="password" id="confirm-password" class="form-control" name="password" required>
+                                    <%= form.password_field :password_confirmation, :class => "form-control", :required => true %>
                                 </div>
                             </div>
 
@@ -30,7 +40,7 @@
                                     <%= t('master.change-password') %>
                                 </button>
                             </div>
-                        </form>
+                        <% end %>
                     </div>
                 </div>
             </div>

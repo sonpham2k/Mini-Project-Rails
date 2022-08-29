@@ -1,25 +1,30 @@
 class UsersController < ApplicationController
     layout :resolve_layout
-    # before_action :set_locale
-
-    # def default_url_options
-    #     {locale: I18n.locale}
-    # end
 
     skip_before_action :require_login, only: [:new, :create]
+
+
+    def index
+        @users = User.paginate(page: params[:page], :per_page => 10)
+    end
 
     def new
         @user = User.new
     end
 
     def create
-        @user = User.new user_params
-        if @user.save
-            flash[:success] = "Register success"
-            redirect_to users_path
-        else
-            flash[:success] = "Register failed"
-            render :new
+        begin
+            @user = User.new register_params
+            @user.attributes = register_params
+            @messages = @user.valid_attributes?(:name, :email, :password)
+            if @messages.none? && @user.save(:validate => false)
+                flash[:success] = "Register success"
+                return redirect_to users_path
+            end
+            flash[:danger] = "Register failed"
+            return render 'new'
+        rescue Exception => e
+            logger.info e
         end
     end
 
@@ -28,46 +33,59 @@ class UsersController < ApplicationController
     end
 
     def update
+        begin
+            @user = User.find(params[:id])
+            @user.attributes = register_params
+            @messages = @user.valid_attributes?(:name, :email, :password)
+            @user.add_error_current_password(User.find(params[:id]).authenticate(password_params[:current_password]))
+            if @messages.none? && @user.save(:validate => false)
+                flash[:success] = "Update profile success!"
+                return redirect_to edit_user_path
+            end
+            flash[:danger] = "Update profile fails!"
+            return render 'edit'
+        rescue Exception => e
+            logger.info e
+        end
     end
 
     def destroy
-        # abort User.find(params[:id]).inspect
-        User.find(params[:id]).delete
-        redirect_to user_url
-    end
-
-    def index
-        @users = User.all
+        begin
+            User.find(params[:id]).delete
+            flash[:success] = "Delete success!"
+            redirect_to users_url
+        rescue Exception => e
+            logger.info e
+        end
     end
     
     def show
         @user = User.find_by id: params[:id]
     end
 
-    def change_password
-        render 'resources/users/change_password'
+    private
+    def user_params
+        params.require(:user).permit :name, :email, :password
     end
 
-    private
-        def user_params
-            params.require(:user).permit :name, :email, :password, :password_confirmation
-        end
+    def register_params
+        params.require(:user).permit :name, :email, :password, :password_confirmation
+    end
 
-        # def set_locale
-        #     I18n.locale = params[:locale] || I18n.default_locale
-        # end
-    
-        # def set_locale
-        #     locale = params[:locale].to_s.strip.to_sym
-        #     I18n.locale = I18n.available_locales.include?(locale) ?
-        #         locale : I18n.default_locale
-        # end
-        def resolve_layout
-            case action_name
-            when 'new'
-              'authen/master'
-            else
-              'homepages/master'
+    def update_params
+        params.require(:user).permit :name, :email, :password, :password_confirmation
+    end
+
+    def password_params
+        params.require(:user).permit :current_password, :password, :confirm_password
+    end
+
+    def resolve_layout
+        @default = 'homepages/master'
+        case action_name
+            when 'new', 'create'
+                @default = 'authen/master'
             end
-        end
+        @default
+    end
 end

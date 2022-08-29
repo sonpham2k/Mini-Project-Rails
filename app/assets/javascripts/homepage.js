@@ -3,17 +3,7 @@
 //= require popper
 //= require bootstrap
 
-//navbar active
-$(document).ready(function () {
-  var path = location.pathname.split("/")[1] + "/" + location.pathname.split("/")[2] + "/" + location.pathname.split("/")[3];
-  var path_dashboard = location.pathname.split("/")[1] + "/" + location.pathname.split("/")[2];
-  if (location.pathname.split("/")[3] == undefined) {
-    $('nav a[href^="/' + path_dashboard + '"]').addClass('active');
-  }
-  $('nav a[href^="/' + path + '"]').addClass('active');
-});
-
-//comment
+// //comment
 var main = function () {
   $('.btn').click(function () {
     var post = $('.status-box').val();

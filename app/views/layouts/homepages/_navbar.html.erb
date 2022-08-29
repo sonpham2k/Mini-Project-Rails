@@ -4,6 +4,15 @@
         <%= link_to image_tag("gb.png", class: "icon-flag navbar-nav ml-auto"), locale: "en" %>
     </div>
 </nav>
+<section class="content">
+    <% flash.each do |key, value| %>
+        <div class="row">
+            <div class="alert alert-<%= key %>  master-center">
+                <%= value %>
+            </div>
+        </div>
+    <% end %>
+</section>
 <nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-content">
         <div class="sidebar-brand">
@@ -39,40 +48,39 @@
                         <span>Dashboard</span>
                     <% end %>
                 </li>
-
-                <% # User %>
-                <li class="header-menu">
-                    <span>User</span>
-                </li>
-                <li class="sidebar-dropdown">
-                    <%= link_to("/users") do %>
-                        <i class="fa fa-users"></i>
-                        <span>List User</span>
-                    <% end %>
-                </li>
+                
+                <% if current_user.is_admin %>
+                    <% # User %>
+                    <li class="header-menu">
+                        <span>User</span>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <%= link_to("/users") do %>
+                            <i class="fa fa-users"></i>
+                            <span>List User</span>
+                        <% end %>
+                    </li>
+                <% end %>
 
                 <% # Post %>
                 <li class="header-menu">
                     <span>Post</span>
                 </li>
                 <li class="sidebar-dropdown">
-                    <%= link_to("/homepages/posts/index") do %>
+                    <%= link_to("/posts") do %>
                         <i class="fa fa-list"></i>
                         <span>List post</span>
                     <% end %>
                 </li>
-                <li class="sidebar-dropdown">
-                    <%= link_to("/homepages/posts/new") do %>
-                        <i class="fa fa-plus-circle"></i>
-                        <span>Add post</span>
-                    <% end %>
-                </li>
-                <li class="sidebar-dropdown">
-                    <%= link_to("/homepages/posts/edit") do %>
-                        <i class="fa fa-pencil"></i>
-                        <span>Edit post</span>
-                    <% end %>
-                </li>
+
+                <% if current_user.is_admin %>
+                    <li class="sidebar-dropdown">
+                        <%= link_to(new_post_path) do %>
+                            <i class="fa fa-plus-circle"></i>
+                            <span>Add post</span>
+                        <% end %>
+                    </li>
+                <% end %>
 
                 <% # Setting %>
                 <li class="header-menu">
@@ -82,12 +90,6 @@
                     <%= link_to(edit_user_path(current_user)) do %>
                         <i class="fa fa-user"></i>
                         <span>Profile</span>
-                    <% end %>
-                </li>
-                <li class="sidebar-dropdown">
-                    <%= link_to("/homepages/users/change-password") do %>
-                        <i class="fa fa-shopping-cart"></i>
-                        <span>Change Password</span>
                     <% end %>
                 </li>
                 <li class="sidebar-dropdown">

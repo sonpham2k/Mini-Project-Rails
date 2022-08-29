@@ -25,15 +25,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Mark@gmail.com</td>
-                    <td>
-                        <%= link_to "Edit", nil, { :class => "edit", "data-toggle" => "modal", "data-target" => "#edit-user"} %>
-                        <%= link_to  "Delete", "#", :class => "delete" %>
-                    </td>
-                </tr>
+                <% @users.each do |user| %>
+                    <tr>
+                        <th scope="row"><%= user.id %> </th>
+                        <td><%= user.name %> </td>
+                        <td><%= user.email %> </td>
+                        <td>
+                            <%= link_to "Edit", nil, { :class => "edit", "data-toggle" => "modal", "data-target" => "#edit-user"} %>
+                            <%= link_to  "Delete", user, method: :delete, data: { confirm: "Really?" }, :class => "delete" %>
+                        </td>
+                    </tr>
+                <% end %>
             </tbody>
         </table>
     </div>

@@ -1,4 +1,4 @@
-class PostController < ActionController::Base
+class PostController < ApplicationController
     layout 'homepages/master'
 
     before_action :set_locale

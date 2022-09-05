@@ -4,7 +4,7 @@
       <div class="main">
           <div class="input-group"> 
             <%# Search %>
-            <%= form.text_field :username, :class => "form-control", :placeholder => "Search by title" %>
+            <%= form.text_field :search, :class => "form-control", :placeholder => "Search by Name" %>
             <div class="input-group-append">
               <%= form.button "Save", :class => "btn btn-primary" do %>
                 <i class="fa fa-search"></i>
@@ -38,6 +38,9 @@
                 <% end %>
             </tbody>
         </table>
+        <div class="d-flex justify-content-center">
+          <%= will_paginate @clients, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+        </div>
     </div>
     <!-- Modal edit user-->
     <div class="modal fade" id="edit-user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

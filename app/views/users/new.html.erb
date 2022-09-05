@@ -7,6 +7,14 @@
                     <div class="card-header"><%= t('master.register') %></div>
                       <div class="card-body">
                         <%= form_for @user do |form| %>
+                            <% if @user.errors.any? %>
+                                <ul>
+                                    <% @user.errors.full_messages.each do |message| %>
+                                        <li><%= message %></li>
+                                    <% end %>
+                                </ul>
+                            <% end %>
+
                             <%# Username %>
                             <div class="form-group row">
                                 <%= form.label :name, "Username: ", :class => "col-md-4 col-form-label text-md-right"%>
@@ -33,9 +41,9 @@
 
                             <%# Repeat Password %>
                             <div class="form-group row">
-                                <%= form.label :password_confirm, "Confirm password: ", :class => "col-md-4 col-form-label text-md-right"%>
+                                <%= form.label :password_confirmation, "Confirm password: ", :class => "col-md-4 col-form-label text-md-right"%>
                                 <div class="col-md-6">
-                                    <%= form.password_field :password_confirm, :class => "form-control"%>
+                                    <%= form.password_field :password_confirmation, :class => "form-control"%>
                                 </div>
                             </div>
 

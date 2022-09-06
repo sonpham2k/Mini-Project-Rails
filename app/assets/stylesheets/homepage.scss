@@ -785,7 +785,7 @@ h4 {
 }
 
 .post-list:hover {
-  background-color: #d1d1d1;
+  background-color: #e7f7dd;
 }
 
 .icon-action-list-user {
@@ -818,7 +818,7 @@ h4 {
 }
 
 .post-vote {
-  margin: 15px;
+  margin-left: 80%;
 }
 
 .answer-post-detail {
@@ -861,7 +861,8 @@ h4 {
   clear: both;
   list-style: none;
   padding-left: 0;
-  width: 100%;
+  width: 68%;
+  margin-left: 7%;
   text-align: left;
 }
 
@@ -876,7 +877,11 @@ h4 {
   margin-bottom: 10px;
   word-wrap: break-word;
   min-height: 42px;
-  box-shadow: 8px 8px 5px #888888;
+  box-shadow: 8px 8px 5px #c7c7c7;
+}
+
+.add-posts {
+  margin: 3px;
 }
 
 .btn-primary {
@@ -889,7 +894,7 @@ h4 {
 {
   margin-bottom: 2%;
   margin-left: 7%;
-  width: 93%;
+  width: 68%;
 }
 
 //master alert
@@ -897,4 +902,18 @@ h4 {
 {
   width: 100%;
   text-align: center;
+}
+
+.span-break {
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.icon-trash {
+  position: relative;
+  top: -76px;
+  right: -122px;
 }

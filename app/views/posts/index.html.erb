@@ -4,7 +4,7 @@
       <div class="main">
           <div class="input-group"> 
             <%# Search %>
-            <%= form.text_field :username, :class => "form-control", :placeholder => "Search by title" %>
+            <%= form.text_field :search, :class => "form-control", :placeholder => "Search by title" %>
             <div class="input-group-append">
               <%= form.button "Save", :class => "btn btn-primary" do %>
                 <i class="fa fa-search"></i>
@@ -13,18 +13,20 @@
           </div>
       </div>
     <% end %>
-
+ <i class="bi bi-trash"></i>
     <div class="main-container">
       <ul class="grid-wrapper">
-        <li class="post-list" data-toggle="modal" data-target="#exampleModal">Post 1</li>
-        <li class="post-list" data-toggle="modal" data-target="#exampleModal">Post 2</li>
-        <li class="post-list" data-toggle="modal" data-target="#exampleModal">Post 3</li>
-        <li class="post-list" data-toggle="modal" data-target="#exampleModal">Post 4</li>
-        <li class="post-list" data-toggle="modal" data-target="#exampleModal">Post 5</li>
-        <li class="post-list" data-toggle="modal" data-target="#exampleModal">Post 6</li>
+        <% @posts.each do |post| %>
+          <li class="post-list" data-toggle="modal" data-target="#exampleModal">
+            <i class="fa fa-ellipsis-v icon-trash"></i>
+            <span class="span-break"><%= post.title %></span>
+          </li>
+        <% end %>
       </ul>
     </div>
-
+    <div class="d-flex justify-content-center">
+      <%= will_paginate @clients, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+    </div>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog size-modal" role="document">
@@ -37,49 +39,26 @@
           </div>
           <div class="modal-body border-modal-body">
               <%= form_with do |form| %>
-                <div class="post-vote">
-                      <% # Title %>
-                      <h3 class="heading">Title post</h3>
+                <div>
+                      <%#  Title %>
+                      <div class="answer">Title post</div>
                       <div class="form-group row">
-                          <%= form.label :title_post, :class => "col-md-4 col-form-label text-md-right" %>
+                          <%= form.label :title, :class => "col-md-4 col-form-label text-md-right text-white" %>
                           <div class="col-md-6">
-                            <%= form.text_area :title_post, :class => "form-control textarea-left", :autofocus => true %>
+                              <%= form.text_area :title, :class => "form-control", :required => true %>
                           </div>
                       </div>
 
-                      <div class="answer-post-detail">Answer</div>
+                      <div class="answer">Answer</div>
                       <% # A %>
                       <div class="form-group row">
-                          <%= form.label :answer_a, "A: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
                           <%= form.check_box :answer_a %>
-                          <%= form.label :answer_a, "Dap an A", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
-                      </div>
-
-                      <% # B %>
-                      <div class="form-group row">
-                          <%= form.label :answer_b, "B: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
-                          <%= form.check_box :answer_b %>
-                          <%= form.label :answer_b, "Dap an B", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
-                      </div>
-
-                      <% # C %>
-                      <div class="form-group row">
-                          <%= form.label :answer_c, "C: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
-                          <%= form.check_box :answer_c %>
-                          <%= form.label :answer_c, "Dap an C", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
-                      </div>
-
-                      <% # D %>
-                      <div class="form-group row">
-                          <%= form.label :answer_d, "D: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
-                          <%= form.check_box :answer_d %>
-                          <%= form.label :answer_d, "Dap an D", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
                       </div>
                 </div>
               <% end %>
           </div>
           <div class="modal-body border-modal-body">
-            <div class="post-vote">
+            <div>
                 <h3 class="heading">Comment</h3>
                 <div class="container">
                     <%= form_with do |form| %>

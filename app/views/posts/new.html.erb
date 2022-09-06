@@ -5,51 +5,39 @@
       <div class="col-md-8">
         <div class="card">
           <div class="card-body">
-          <%= form_with do |form| %>
-                <% # Title %>
+          <%= form_for @post do |form| %>
+                
+                <% if @post.errors.any? %>
+                    <ul>
+                        <% @post.errors.full_messages.each do |message| %>
+                            <li><%= message %></li>
+                        <% end %>
+                    </ul>
+                <% end %>
+
+                <%#  Title %>
                 <div class="answer">Title post</div>
                 <div class="form-group row">
-                    <%= form.label :title_post, :class => "col-md-4 col-form-label text-md-right" %>
+                    <%= form.label :title, :class => "col-md-4 col-form-label text-md-right text-white" %>
                     <div class="col-md-6">
-                        <%= form.text_area :title_post, :class => "form-control" %>
+                        <%= form.text_area :title, :class => "form-control", :required => true %>
                     </div>
                 </div>
 
-                <%# Answer %>
+                <%#  Answer %>
                 <div class="answer">Answer</div>
-
-                <%# A %>
                 <div class="form-group row">
-                    <%= form.label :answer_a, "A: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
+                    <%= form.label :title, :class => "col-md-4 col-form-label text-md-right text-white" %>
                     <div class="col-md-6">
-                        <%= form.text_area :answer_a, :class => "form-control" %>
+                        <input class="form-control add-posts" type="text" value="" name="content[]" required=true>
                     </div>
                 </div>
-
-                <%# B %>
-                <div class="form-group row">
-                    <%= form.label :answer_b, "B: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
-                    <div class="col-md-6">
-                        <%= form.text_area :answer_b, :class => "form-control" %>
-                    </div>
+                <div id="main">
                 </div>
-
-                <%# C %>
-                <div class="form-group row">
-                    <%= form.label :answer_c, "C: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
-                    <div class="col-md-6">
-                        <%= form.text_area :answer_c, :class => "form-control" %>
-                    </div>
+                <div class="post-vote">
+                    <%= link_to "+", "#", :class => "btn btn-primary ", :id => "add" %>
                 </div>
-
-                <%# D %>
-                <div class="form-group row">
-                    <%= form.label :answer_D, "D: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
-                    <div class="col-md-6">
-                        <%= form.text_area :answer_d, :class => "form-control" %>
-                    </div>
-                </div>
-
+                
                 <%# Edit post %>
                 <div class="col-md-6 offset-md-4">
                     <%= form.button "Submit", :class => "btn btn-primary" %>

@@ -11,6 +11,5 @@ Rails.application.routes.draw do
     get 'password_resets/change_password'
     get 'password_resets/reset'
 
-
     resources :users, :posts
 end

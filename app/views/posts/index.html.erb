@@ -4,7 +4,7 @@
       <div class="main">
           <div class="input-group"> 
             <%# Search %>
-            <%= form.text_field :username, :class => "form-control", :placeholder => "Search by title" %>
+            <%= form.text_field :search, :class => "form-control", :placeholder => "Search by title" %>
             <div class="input-group-append">
               <%= form.button "Save", :class => "btn btn-primary" do %>
                 <i class="fa fa-search"></i>
@@ -13,91 +13,19 @@
           </div>
       </div>
     <% end %>
-
     <div class="main-container">
       <ul class="grid-wrapper">
-        <li class="post-list" data-toggle="modal" data-target="#exampleModal">Post 1</li>
-        <li class="post-list" data-toggle="modal" data-target="#exampleModal">Post 2</li>
-        <li class="post-list" data-toggle="modal" data-target="#exampleModal">Post 3</li>
-        <li class="post-list" data-toggle="modal" data-target="#exampleModal">Post 4</li>
-        <li class="post-list" data-toggle="modal" data-target="#exampleModal">Post 5</li>
-        <li class="post-list" data-toggle="modal" data-target="#exampleModal">Post 6</li>
+        <% @posts.each do |post| %>
+          <li class="post-list">
+            <%# <i class="fa fa-ellipsis-v icon-trash"></i> %>
+            <%= link_to "Edit", edit_post_path(post.id)  %>
+            <%= link_to "Delete", post, method: :delete, data: { confirm: "Really?" }, :class => "delete" %>
+            <%= link_to post.title, post_path(post.id), :class => "span-break" %>
+          </li>
+        <% end %>
       </ul>
     </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog size-modal" role="document">
-        <div class="modal-content size-post-detail">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Post Detail</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="modal-body border-modal-body">
-              <%= form_with do |form| %>
-                <div class="post-vote">
-                      <% # Title %>
-                      <h3 class="heading">Title post</h3>
-                      <div class="form-group row">
-                          <%= form.label :title_post, :class => "col-md-4 col-form-label text-md-right" %>
-                          <div class="col-md-6">
-                            <%= form.text_area :title_post, :class => "form-control textarea-left", :autofocus => true %>
-                          </div>
-                      </div>
-
-                      <div class="answer-post-detail">Answer</div>
-                      <% # A %>
-                      <div class="form-group row">
-                          <%= form.label :answer_a, "A: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
-                          <%= form.check_box :answer_a %>
-                          <%= form.label :answer_a, "Dap an A", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
-                      </div>
-
-                      <% # B %>
-                      <div class="form-group row">
-                          <%= form.label :answer_b, "B: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
-                          <%= form.check_box :answer_b %>
-                          <%= form.label :answer_b, "Dap an B", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
-                      </div>
-
-                      <% # C %>
-                      <div class="form-group row">
-                          <%= form.label :answer_c, "C: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
-                          <%= form.check_box :answer_c %>
-                          <%= form.label :answer_c, "Dap an C", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
-                      </div>
-
-                      <% # D %>
-                      <div class="form-group row">
-                          <%= form.label :answer_d, "D: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
-                          <%= form.check_box :answer_d %>
-                          <%= form.label :answer_d, "Dap an D", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
-                      </div>
-                </div>
-              <% end %>
-          </div>
-          <div class="modal-body border-modal-body">
-            <div class="post-vote">
-                <h3 class="heading">Comment</h3>
-                <div class="container">
-                    <%= form_with do |form| %>
-                      <%= form.text_area nil, :class => "form-control status-box textarea-comment", :placeholder => "Enter your comment here..." %>
-                      <div class="button-group pull-right">
-                          <p class="counter">250</p>
-                          <%= link_to "Post", "#", :class => "btn btn-primary" %>
-                      </div>
-                      <ul class="posts">
-                      </ul>
-                    <% end %>
-                </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Save Vote</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="d-flex justify-content-center">
+      <%= will_paginate @clients, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+    </div>  
 <% end %>

@@ -23,7 +23,8 @@ ActiveRecord::Schema.define(version: 2022_08_22_072551) do
 
   create_table "post_contents", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.integer "post_id"
-    t.integer "order_content"
+    t.string "answer"
+    t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"

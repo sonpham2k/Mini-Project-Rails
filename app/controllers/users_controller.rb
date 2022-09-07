@@ -35,9 +35,14 @@ class UsersController < ApplicationController
     def update
         begin
             @user = User.find(params[:id])
-            @user.attributes = register_params
-            @messages = @user.valid_attributes?(:name, :email, :password)
-            @user.add_error_current_password(User.find(params[:id]).authenticate(password_params[:current_password]))
+
+            if @user.is_admin
+                @user.attributes = register_params
+                @messages = @user.valid_attributes?(:name, :email, :password)
+                @user.add_error_current_password(User.find(params[:id]).authenticate(password_params[:current_password]))
+            end
+            @user.attributes = other_user_params
+            @messages = @user.valid_attributes?(:name, :email)
             if @messages.none? && @user.save(:validate => false)
                 flash[:success] = "Update profile success!"
                 return redirect_to edit_user_path
@@ -68,11 +73,11 @@ class UsersController < ApplicationController
         params.require(:user).permit :name, :email, :password
     end
 
-    def register_params
-        params.require(:user).permit :name, :email, :password, :password_confirmation
+    def other_user_params
+        params.require(:user).permit :name, :email
     end
 
-    def update_params
+    def register_params
         params.require(:user).permit :name, :email, :password, :password_confirmation
     end
 

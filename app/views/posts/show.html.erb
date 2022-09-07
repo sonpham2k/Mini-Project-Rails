@@ -1,3 +1,46 @@
 <% content_for :content do %>
-    <div style="text-align: center">Show Post</div> 
+    <%= form_for @post do |form| %>
+        <div>
+            <%#  Title %>
+            <div class="answer">Title Post</div>
+            <div class="form-group row">
+                <%= form.label :title, :class => "col-md-4 col-form-label text-md-right text-white" %>
+                <div class="col-md-6">
+                    <%= form.text_area :title, :class => "form-control", :disabled => true, :required => true, :value => @post.title %>
+                </div>
+            </div>
+
+            <div class="answer">Answer</div>
+            <% @post_content.each do |post_content| %>
+                <div class="form-group row comment">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col check-box">
+                                <input type="checkbox" name="content" id="content">
+                            </div>
+                            <div class="col">
+                                <input class="form-control size-text-field" disabled="disabled" type="text" name="content" id="content" value="<%= post_content.content%>">
+                            </div>
+                        </div>              
+                    </div>
+                </div>
+            <% end %>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary button-save-vote-post">Save Vote</button>
+        </div>  
+    <% end %>
+    <div class="border-comment">
+        <h3 class="heading text-center">Comment</h3>
+        <div class="container">
+            <%= form_with do |form| %>
+                <%= form.text_area nil, :class => "form-control status-box textarea-comment textfield-comment", :placeholder => "Enter your comment here..." %>
+                <div class="button-group pull-right">
+                    <%= link_to "Post", "#", :class => "btn btn-primary button-post-comment" %>
+                </div>
+                <ul class="posts">
+                </ul>
+            <% end %>
+        </div>
+    </div>
 <% end %>

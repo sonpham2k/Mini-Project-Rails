@@ -18,8 +18,10 @@
         <% @posts.each do |post| %>
           <li class="post-list">
             <%# <i class="fa fa-ellipsis-v icon-trash"></i> %>
-            <%= link_to "Edit", edit_post_path(post.id)  %>
-            <%= link_to "Delete", post, method: :delete, data: { confirm: "Really?" }, :class => "delete" %>
+            <% if current_user.is_admin%>
+              <%= link_to "Edit", edit_post_path(post.id)  %>
+              <%= link_to "Delete", post, method: :delete, data: { confirm: "Really?" }, :class => "delete" %>
+            <% end %>
             <%= link_to post.title, post_path(post.id), :class => "span-break" %>
           </li>
         <% end %>

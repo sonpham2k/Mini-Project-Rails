@@ -844,6 +844,8 @@ h4 {
 .container {
   width: 520px;
   margin-top: 20px;
+  position: relative;
+  margin-left: -10%;
 }
 
 .button-group {
@@ -924,7 +926,7 @@ h4 {
 }
 
 .button-post-comment {
-  position: fixed;
+  position: relative;
   margin-left: 2%;
 }
 
@@ -951,6 +953,18 @@ h4 {
 }
 
 .border-comment {
-  
+  margin-top: 6%;
   border: 1px gray solid;
+  width: 66%;
+  margin-left: 27%;
+}
+
+.input-group-choose {
+  margin-left: 16%;
+  width: 67%;
+}
+
+.remove-dot-ul {
+  list-style-type: none;
+  margin-left: -5%;
 }

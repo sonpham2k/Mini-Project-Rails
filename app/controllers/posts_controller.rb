@@ -34,10 +34,42 @@ class PostsController < ApplicationController
 
     def edit
         @post = Post.find_by id: params[:id]
-        @post_content = @post.post_content
     end
 
     def update
+        begin
+            result = []
+            items_remove = []
+            @post = Post.find_by id: params[:id]
+            @post.attributes = post_params
+            @messages = @post.valid_attributes?(:title)
+            if @messages.none? && @post.save(:validate => false)
+                if !params[:content].nil?
+                    params[:content].each do |post_content|
+                        @content_list = {
+                            post_id: @post.id,
+                            content: post_content
+                        }
+                        result.push(@content_list)
+                    end
+                end
+                if !@content_list.nil?
+                    PostContent.create(result)
+                end
+                if !params[:post_remove_ids].nil?
+                    params[:post_remove_ids].split(",").each do |post_remove_ids|
+                        items_remove.push post_remove_ids
+                    end
+                end
+                PostContent.destroy(items_remove)
+                flash[:success] = "Update post success"
+            end
+
+            flash[:danger] = "Update post failed"
+            return render 'edit'
+        rescue Exception => e
+            logger.info e
+        end
     end
 
     def destroy

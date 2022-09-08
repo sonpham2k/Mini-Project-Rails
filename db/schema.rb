@@ -48,7 +48,6 @@ ActiveRecord::Schema.define(version: 2022_08_22_072551) do
   create_table "result_votes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.integer "post_content_id"
     t.integer "user_id"
-    t.integer "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"

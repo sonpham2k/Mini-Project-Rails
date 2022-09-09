@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.0'
 
+#time
+gem 'time_difference'
+
 # bootstrap
 gem 'bootstrap', '~> 4.0'
 

@@ -5,8 +5,7 @@
       <div class="col-md-8">
         <div class="card">
           <div class="card-body">
-          <%= form_for @post do |form| %>
-                
+          <%= form_with(model: @post, url: post_contents_update_post_url, id: 'vote', method: :post, local: true) do |form| %>
                 <% if @post.errors.any? %>
                     <ul>
                         <% @post.errors.full_messages.each do |message| %>
@@ -25,41 +24,100 @@
                 </div>
 
                 <%#  Answer %>
-                <div class="answer">Answer</div>
-                <% @post_content.each do |post_content| %>
-                <div class="form-group row comment">
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col check-box">
-                                <input type="checkbox" name="content[1][]" value="1" id="content-<%= post_content.id %>">
+                <div id="answerVote" class="answer">Answer</div>
+                <ul class="remove-dot-ul" id="answer">
+                    <% @post.post_contents.each do |post_content| %>
+                        <li>
+                            <div class="form-group row comment">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col check-box"> 
+                                            <% count = 0 %>
+                                            <% @user.result_votes.each do |vote| %>
+                                                <% if vote.post_content_id==post_content.id %>
+                                                    <% count = count +1 %>
+                                                <% end %>
+                                            <% end %>
+                                            <% if count == 0 %>
+                                                <input type="checkbox" name="content[]" value="1" post_content_id="<%= post_content.id %>" class="vote-checkbox">
+                                            <% else %>
+                                                <input type="checkbox" name="content[]" checked value="1" post_content_id="<%= post_content.id %>" class="vote-checkbox">
+                                            <% end %>
+                                        </div>
+                                        <%# <% post_content.result_votes.each do |user| %> 
+                                            <%# <%= user.user.name %> 
+                                        <%# <% end %> 
+                                        <div class="col">
+                                            <input class="form-control size-text-field" disabled="disabled" type="text" name="content" id="content" value="<%= post_content.content %>">
+                                            <i class="fa fa-eye fa-2x" aria-hidden="true"></i> <%= post_content.result_votes.count() %> Voted
+                                        </div>
+                                    </div>                                  
+                                </div>
                             </div>
-                            <div class="col">
-                                <input class="form-control size-text-field" disabled="disabled" type="text" name="content" id="content" value="<%= post_content.content %>">
-                                75%
-                            </div>
-                        </div>              
-                    </div>
-                </div>
-                <% end %>
-                
+                        </li>
+                    <% end %>
+                </ul>
                 <%# Save %>
                 <div>
-                    <button type="button" class="btn btn-primary button-save-vote-post">Save Vote</button>
+                    <button type="submit" id="submitVote" class="btn btn-primary button-save-vote-post">Save Vote</button>
                 </div> 
             <% end %>
-             <div class="border-comment">
-                <h3 class="heading text-center">Comment</h3>
-                <div class="container">
-                    <%= form_with do |form| %>
-                        <%= form.text_area nil, :class => "form-control status-box textarea-comment textfield-comment", :placeholder => "Enter your comment here..." %>
-                        <div class="button-group pull-right">
-                            <%= link_to "Post", "#", :class => "btn btn-primary button-post-comment" %>
+
+            <%# Comment %>
+            <%= form_with(model: @comment, url: comments_url, id: 'comment', method: :post, local: true) do |form| %>
+                <input type="hidden" id="post_id" name="post_id" value="<%= @post.id %>">
+                <input type="hidden" id="user_id" name="user_id" value="<%= current_user.name %>">
+                <div class="div-comment">
+                    <div class="container-fluid my-5">
+                        <div class="left"><h3>Comment</h3></div>  
+                        <% @post.comments.each do |comment| %>
+                        <section>
+                            <div class="border p-2 mt-3">
+                            <div class="row m-0">
+                                <div class="">
+                                    <a class="text-decoration-none" href="#">
+                                        <img class="" src="#" width="50" height="50" alt="...">
+                                    </a>
+                                </div>
+                                <div class="flex-grow-1 pl-2">
+                                    <a class="text-decoration-none" href="#">
+                                        <h2 class="text-capitalize h5 mb-0">
+                                            <%= comment.user.name.to_s %>
+                                        </h2>
+                                    </a>
+                                    <p class="small text-secondary m-0 mt-1"><%= distance_of_time_in_words(comment.created_at, Time.utc(*Time.new.to_a)) %> ago</p>
+                                </div>
+                                <% if comment.user_id == current_user.id %>
+                                    <%= link_to "Edit", edit_comment_path(comment.id), :id => "edit_comment" %>
+                                    <%= link_to "Delete", comment, method: :delete, data: { confirm: "Really?" }, :class => "delete"%>
+                                <% end %>
+                            </div>
+                            <div class="">
+                                <p class="my-2">
+                                   <%= comment.content_comment %>
+                                </p>
+                            </div>
+                        </section>
+                        <% end %>
+                        <div id="list_comment">
                         </div>
-                        <ul class="posts">
-                        </ul>
-                    <% end %>
+                        <section>
+                            <div class="card-body">
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                                        <div class="form-group">
+                                            <%= form.text_area :content_comment, :class => "form-control", :required => true, :maxlength => 255, :placeholder => "Max 255 characters.." %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <button type="submit" id="submitComment" data-no-turbolink="true" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
-            </div>
+            <% end %>
           </div>
         </div>
       </div>

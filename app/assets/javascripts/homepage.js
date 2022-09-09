@@ -6,6 +6,7 @@
 //Add comment
 var main = function () {
   var removePostIds = [];
+  var checkPostIds = [];
   $('#add').click(function () {
     var newDiv = $(`
         <div class="form-group row">
@@ -22,11 +23,40 @@ var main = function () {
     $(this).closest("li").remove();
   });
 
+  $('.vote-checkbox').on('click', function(e) {
+    var check = $(this).closest("li").find('input').attr('post_content_id')
+    let count = 0;
+    let index = 0;
+    for (let i = 0; i <= checkPostIds.length; i ++) {
+        if (checkPostIds[i] === check)  {
+            count ++;
+            index = i;
+            break
+        }
+    }
+    if (count > 0) {
+      a1 = checkPostIds.slice(0, index);
+      a2 = checkPostIds.slice(index + 1, checkPostIds.length);
+      checkPostIds = a1.concat(a2);
+    } else {
+      checkPostIds.push(check);
+    }
+  });
+
   $('#submit').on('click', function (e) {
     var post_remove_ids = $(`
       <input type="hidden" name="post_remove_ids" value=` + removePostIds +`>
       `);
     $('#answer').append(post_remove_ids);
+  });
+
+  $('#submitVote').on('click', function (e) {
+    e.preventDefault();
+    var check_post_vote_ids = $(`
+      <input type="hidden" name="post_vote_ids" value=` + checkPostIds +`>
+      `);
+    $('#answerVote').append(check_post_vote_ids);
+    $('#vote').submit();
   });
 }
 $(document).ready(main)

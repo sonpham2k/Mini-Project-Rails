@@ -806,6 +806,7 @@ h4 {
 .delete {
   color: red;
   cursor: pointer;
+  margin-left: 8px;
 }
 
 //post detail
@@ -967,4 +968,13 @@ h4 {
 .remove-dot-ul {
   list-style-type: none;
   margin-left: -5%;
+}
+
+//Comment
+.div-comment {
+  border: 1px solid gray;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 62%;
+  margin-left: 27%;
 }

@@ -7,9 +7,9 @@ class User < ApplicationRecord
                                     dependent: :destroy
     has_many :following, through: :active_relationships, source: :followed
     has_many :followers, through: :passive_relationships, source: :follower
-    has_many :comment
-    has_many :post
-    has_many :result_vote
+    has_many :comments
+    has_many :posts
+    has_many :result_votes
     has_many :relationships, :foreign_key => "follower_id",
                        :dependent => :destroy
 

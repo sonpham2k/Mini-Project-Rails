@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     post '/login', to: 'authens#create'
     delete '/logout', to: 'authens#destroy'
 
+    post 'post_contents/:id/update_post', to: 'post_contents#update_post', as: 'post_contents_update_post'
+
     get 'password_resets/new'
     post 'password_resets/create'
     post 'password_resets/update'
@@ -11,5 +13,5 @@ Rails.application.routes.draw do
     get 'password_resets/change_password'
     get 'password_resets/reset'
 
-    resources :users, :posts
-end
+    resources :users, :posts, :comments
+  end

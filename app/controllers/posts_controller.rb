@@ -10,26 +10,30 @@ class PostsController < ApplicationController
     end
 
     def create
-        result = []
-        @post = Post.new post_params
-        @post.user_id = current_user.id
-        @messages = @post.valid_attributes?(:title)
-        if @messages.none? && @post.save(:validate => false)
-            params[:content].each do |post_content|
-                @content_list = {
-                    post_id: @post.id,
-                    content: post_content
-                }
-                result.push(@content_list)
+        begin
+            result = []
+            @post = Post.new post_params
+            @post.user_id = current_user.id
+            @messages = @post.valid_attributes?(:title)
+            if @messages.none? && @post.save(:validate => false)
+                params[:content].each do |post_content|
+                    @content_list = {
+                        post_id: @post.id,
+                        content: post_content
+                    }
+                    result.push(@content_list)
+                end
+                if !@content_list.nil?
+                    PostContent.create(result)
+                end
+                flash[:success] = "Add post success"
+                return redirect_to posts_path
             end
-            if !@content_list.nil?
-                PostContent.create(result)
-            end
-            flash[:success] = "Add post success"
-            return redirect_to posts_path
+            flash[:danger] = "Add post failed"
+            return render 'new'
+        rescue Exception => e
+            logger.info e
         end
-        flash[:danger] = "Add post failed"
-        return render 'new'
     end
 
     def edit
@@ -74,8 +78,8 @@ class PostsController < ApplicationController
 
     def destroy
         begin
-            @post = Post.find_by id: params[:id]
-            @post_content_ids = @post.post_content
+            @post = Post.includes(:post_contents).find_by(id: params[:id])
+            @post_content_ids = @post.post_contents
             array = []
             @post_content_ids.each do |post_content|
                 array.push post_content.id
@@ -90,8 +94,8 @@ class PostsController < ApplicationController
     end
 
     def show
-        @post = Post.find_by id: params[:id]
-        @post_content = @post.post_content
+        @post = Post.includes(:post_contents).find_by(id: params[:id])
+        @user = User.includes(:result_votes).find_by(id: current_user.id)
     end
 
     private

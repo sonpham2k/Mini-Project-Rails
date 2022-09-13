@@ -35,8 +35,7 @@ class UsersController < ApplicationController
     def update
         begin
             @user = User.find(params[:id])
-
-            if @user.is_admin
+            if @user.id == current_user.id
                 @user.attributes = register_params
                 @messages = @user.valid_attributes?(:name, :email, :password)
                 @user.add_error_current_password(User.find(params[:id]).authenticate(password_params[:current_password]))

@@ -18,7 +18,6 @@ User.create!(name: "Example User",
     password = "123123"
     User.create!(name: name,
                 email: email,
-                is_admin: false,
                 password: password,
                 password_confirmation: "123123")
 end

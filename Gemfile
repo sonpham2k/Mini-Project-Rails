@@ -6,6 +6,12 @@ ruby '2.7.0'
 #time
 gem 'time_difference'
 
+#file:gem
+gem 'file_validators'
+
+#image
+gem "image_processing", ">= 1.2"
+
 # bootstrap
 gem 'bootstrap', '~> 4.0'
 

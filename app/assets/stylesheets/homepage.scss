@@ -893,16 +893,14 @@ h4 {
   border-color: #2e6da4;
 }
 
-.textarea-comment
-{
+.textarea-comment {
   margin-bottom: 2%;
   margin-left: 7%;
   width: 68%;
 }
 
 //master alert
-.master-center
-{
+.master-center {
   width: 100%;
   text-align: center;
 }
@@ -972,9 +970,98 @@ h4 {
 
 //Comment
 .div-comment {
-  border: 1px solid gray;
+  border: 4px solid #cbc9c9;
+  border-radius: 6%;
   margin-top: 10px;
   margin-bottom: 10px;
   width: 62%;
   margin-left: 27%;
+}
+
+//Image
+.size-image {
+  width: 40%;
+}
+
+.size-image-edit-new {
+  width: 12%;
+  margin-left: 35%;
+  margin-top: -3%;
+}
+
+.size-image-edit-old {
+  width: 12%;
+  margin-left: 10%;
+  margin-top: -3%;
+}
+
+.size-image-preview {
+  width: 100px;
+  height: 150px;
+}
+
+.choosen-avatar {
+  border: 1px;
+  padding: 0px;
+  margin-top: 2%;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  background: red;
+  cursor: inherit;
+  display: block;
+}
+
+.file-input-label {
+  padding: 0px 10px;
+  display: table-cell;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+input[readonly] {
+  background-color: white !important;
+  cursor: text !important;
+}
+
+.size-image-list {
+  width: 13%;
+  border-radius: 33%;
+  margin-left: 10%;
+}
+
+.size-image-comment {
+  margin-top: 38%;
+  border-radius: 50%;
+  width: 82%;
+  height: 59%;
+}
+
+#grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 50px 1fr;
+}
+
+.border-list-user {
+  border-bottom: 1px solid #c9c9c9;
+}
+
+.edit_comment {
+  cursor: pointer;
 }

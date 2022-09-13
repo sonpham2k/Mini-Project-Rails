@@ -47,6 +47,14 @@
                                 </div>
                             </div>
 
+                            <%# Avatar %>
+                            <div class="form-group row">
+                                <%= form.label :avatar, "Avatar: ", :class => "col-md-4 col-form-label text-md-right"%>
+                                <div class="col-md-6">
+                                    <%= form.file_field :avatar, :class => "choosen-avatar" %>
+                                </div>
+                            </div>
+
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     <%= t('master.register') %>

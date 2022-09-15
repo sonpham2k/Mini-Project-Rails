@@ -18,21 +18,21 @@ var main = function () {
     $('#main').append(newDiv);
   });
 
-  $('.trigger-delete-post').on('click', function(e) {
+  $('.trigger-delete-post').on('click', function (e) {
     removePostIds.push($(this).closest("li").find('input').attr('post_id'));
     $(this).closest("li").remove();
   });
 
-  $('.vote-checkbox').on('click', function(e) {
+  $('.vote-checkbox').on('click', function (e) {
     var check = $(this).closest("li").find('input').attr('post_content_id')
     let count = 0;
     let index = 0;
-    for (let i = 0; i <= checkPostIds.length; i ++) {
-        if (checkPostIds[i] === check)  {
-            count ++;
-            index = i;
-            break
-        }
+    for (let i = 0; i <= checkPostIds.length; i++) {
+      if (checkPostIds[i] === check) {
+        count++;
+        index = i;
+        break
+      }
     }
     if (count > 0) {
       a1 = checkPostIds.slice(0, index);
@@ -45,7 +45,7 @@ var main = function () {
 
   $('#submit').on('click', function (e) {
     var post_remove_ids = $(`
-      <input type="hidden" name="post_remove_ids" value=` + removePostIds +`>
+      <input type="hidden" name="post_remove_ids" value=` + removePostIds + `>
       `);
     $('#answer').append(post_remove_ids);
   });
@@ -53,10 +53,24 @@ var main = function () {
   $('#submitVote').on('click', function (e) {
     e.preventDefault();
     var check_post_vote_ids = $(`
-      <input type="hidden" name="post_vote_ids" value=` + checkPostIds +`>
+      <input type="hidden" name="post_vote_ids" value=` + checkPostIds + `>
       `);
     $('#answerVote').append(check_post_vote_ids);
     $('#vote').submit();
   });
+
+  $('#user_avatar').on('change', function (event) {
+    var output = document.getElementById('target');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function () {
+      URL.revokeObjectURL(output.src)
+    }
+  });
 }
 $(document).ready(main)
+
+function openModelEditComment(message, actionUrl) {
+  $('#edit_content_comment').val(message);
+  $('#comment').attr('action', actionUrl);
+  $('#modal-edit-comment').modal('show');
+}

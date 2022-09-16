@@ -84,7 +84,7 @@ class PostsController < ApplicationController
         array.push post_content.id
       end
       PostContent.destroy(array)
-      @post.delete
+      @post.destroy
       flash[:success] = "Delete post success!"
       redirect_to posts_url
     rescue Exception => e

@@ -1,12 +1,6 @@
 class CommentsController < ApplicationController
   layout "homepages/master"
 
-  def index
-  end
-
-  def new
-  end
-
   def create
     begin
       @post = Post.includes(:comments).find_by(id: params[:post_id])
@@ -41,7 +35,7 @@ class CommentsController < ApplicationController
     begin
       @comment = Comment.includes(:post).find(params[:id])
       @post = @comment.post
-      @comment.delete
+      @comment.destroy
       flash[:success] = "Delete comment success!"
       return redirect_to post_path(@post)
     rescue Exception => e
@@ -52,11 +46,7 @@ class CommentsController < ApplicationController
   def show
   end
 
-  def update_post
-  end
-
   private
-
   def comment_params
     params.permit :post_id, :content_comment
   end

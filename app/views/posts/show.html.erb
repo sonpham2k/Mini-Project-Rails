@@ -125,7 +125,7 @@
                                                         <%= comment.user.name.to_s %>
                                                     </h2>
                                                 </a>
-                                                <p class="small text-secondary m-0 mt-1"><%= distance_of_time_in_words(comment.created_at, Time.utc(*Time.new.to_a)) %> ago</p>
+                                                <p class="small text-secondary m-0 mt-1"><%= comment.count_time_comment %> <%= t('post.ago') %></p>
                                             </div>
                                             <% if comment.user_id == current_user.id %>
                                             <a onclick="openModelEditComment('<%= comment.content_comment %>','<%= comment_path(comment.id) %>')" class="edit_comment" aria-hidden="true"><%= t('post.edit') %></a>

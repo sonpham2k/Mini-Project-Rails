@@ -6,6 +6,12 @@ ruby '2.7.0'
 # i18n
 gem 'rails-i18n'
 
+#paranoia
+gem "paranoia", "~> 2.2"
+
+#csv
+gem 'csv'
+
 #time
 gem 'time_difference'
 

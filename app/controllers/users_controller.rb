@@ -45,7 +45,7 @@ class UsersController < ApplicationController
         return redirect_to edit_user_path
       end
       flash[:danger] = "Update profile fails!"
-      return render "edit"
+      render "edit"
     rescue Exception => e
       logger.info e
     end
@@ -53,7 +53,8 @@ class UsersController < ApplicationController
 
   def destroy
     begin
-      User.find(params[:id]).delete
+      @user = User.find(params[:id])
+      @user.destroy
       flash[:success] = "Delete success!"
       redirect_to users_url
     rescue Exception => e

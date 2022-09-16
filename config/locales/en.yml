@@ -70,3 +70,4 @@ en:
     close: 'Close'
     max-comment: 'Max 255 characters..'
     add: 'Add Post'
+    ago: "ago"

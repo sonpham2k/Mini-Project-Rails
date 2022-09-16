@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.0'
 
+# i18n
+gem 'rails-i18n'
+
 #time
 gem 'time_difference'
 

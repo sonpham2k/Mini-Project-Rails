@@ -17,7 +17,7 @@
 
                             <%# Username %>
                             <div class="form-group row">
-                                <%= form.label :name, "Username: ", :class => "col-md-4 col-form-label text-md-right"%>
+                                <%= form.label :name, t('user.username')+":", :class => "col-md-4 col-form-label text-md-right"%>
                                 <div class="col-md-6">
                                     <%= form.text_field :name, :class => "form-control"%>
                                 </div>
@@ -33,7 +33,7 @@
 
                             <%# Password %>
                             <div class="form-group row">
-                                <%= form.label :password, "Password: ", :class => "col-md-4 col-form-label text-md-right"%>
+                                <%= form.label :password, t('user.password')+":", :class => "col-md-4 col-form-label text-md-right"%>
                                 <div class="col-md-6">
                                     <%= form.password_field :password, :class => "form-control"%>
                                 </div>
@@ -41,7 +41,7 @@
 
                             <%# Repeat Password %>
                             <div class="form-group row">
-                                <%= form.label :password_confirmation, "Confirm password: ", :class => "col-md-4 col-form-label text-md-right"%>
+                                <%= form.label :password_confirmation, t('user.confirm-password')+":", :class => "col-md-4 col-form-label text-md-right"%>
                                 <div class="col-md-6">
                                     <%= form.password_field :password_confirmation, :class => "form-control"%>
                                 </div>
@@ -49,7 +49,7 @@
 
                             <%# Avatar %>
                             <div class="form-group row">
-                                <%= form.label :avatar, "Avatar: ", :class => "col-md-4 col-form-label text-md-right"%>
+                                <%= form.label :avatar, t('user.avatar')+":", :class => "col-md-4 col-form-label text-md-right"%>
                                 <div class="col-md-6">
                                     <%= form.file_field :avatar, :class => "choosen-avatar" %>
                                 </div>

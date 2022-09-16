@@ -4,7 +4,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit</h5>
+                <h5 class="modal-title"><%= t('post.edit') %></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,14 +13,14 @@
                 <%= form.text_area :content_comment, :id => "edit_content_comment", :class => "form-control", :maxlength => 255 %>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" id="submitComment" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('post.close') %></button>
+                <button type="submit" id="submitComment" class="btn btn-primary"><%= t('post.save') %></button>
             </div>
         </div>
     </div>
 </div>
 <% end %>
-<div class="title">Detail Post</div>
+<div class="title"><%= t('post.detail') %></div>
 <div class="cotainer">
 <div class="row justify-content-center">
     <div class="col-md-8">
@@ -35,7 +35,7 @@
                 </ul>
                 <% end %>
                 <% #  Title %>
-                <div class="answer">Title post</div>
+                <div class="answer"><%= t('post.title') %></div>
                 <div class="form-group row">
                     <%= form.label :title, :class => "col-md-4 col-form-label text-md-right text-white" %>
                     <div class="col-md-6">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <% #  Answer %>
-                <div id="answerVote" class="answer">Answer</div>
+                <div id="answerVote" class="answer"><%= t('post.answer') %></div>
                 <ul class="remove-dot-ul" id="answer">
                     <% @post.post_contents.each do |post_content| %>
                     <li>
@@ -72,7 +72,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title">List User Vote</h5>
+                                                    <h5 class="modal-title"><%= t('post.list-user-vote') %></h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -84,7 +84,7 @@
                                                 </div>
                                                 <% end %>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('post.close') %></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -98,7 +98,7 @@
                 </ul>
                 <% # Save %>
                 <div>
-                    <button type="submit" id="submitVote" class="btn btn-primary button-save-vote-post">Save Vote</button>
+                    <button type="submit" id="submitVote" class="btn btn-primary button-save-vote-post"><%= t('post.save-vote') %></button>
                 </div>
                 <% end %>
                 <% # Comment %>
@@ -108,7 +108,7 @@
                 <div class="div-comment">
                     <div class="container-fluid my-5">
                         <div class="left">
-                            <h3>Comment (<%= @post.comments.count() %>)</h3>
+                            <h3><%= t('post.comment') %> (<%= @post.comments.count() %>)</h3>
                         </div>
                         <% @post.comments.each do |comment| %>
                         <section>
@@ -128,8 +128,8 @@
                                                 <p class="small text-secondary m-0 mt-1"><%= distance_of_time_in_words(comment.created_at, Time.utc(*Time.new.to_a)) %> ago</p>
                                             </div>
                                             <% if comment.user_id == current_user.id %>
-                                            <a onclick="openModelEditComment('<%= comment.content_comment %>','<%= comment_path(comment.id) %>')" class="edit_comment" aria-hidden="true">Edit</a>
-                                            <%= link_to "Delete", comment, method: :delete, data: { confirm: "Really?" }, :class => "delete" %>
+                                            <a onclick="openModelEditComment('<%= comment.content_comment %>','<%= comment_path(comment.id) %>')" class="edit_comment" aria-hidden="true"><%= t('post.edit') %></a>
+                                            <%= link_to t('post.delete'), comment, method: :delete, data: { confirm: t('post.really') }, :class => "delete" %>
                                             <% end %>
                                             <% # Modal %>
                                         </div>
@@ -149,12 +149,12 @@
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
                                         <div class="form-group">
-                                            <%= form.text_area :content_comment, :class => "form-control", :required => true, :maxlength => 255, :placeholder => "Max 255 characters.." %>
+                                            <%= form.text_area :content_comment, :class => "form-control", :required => true, :maxlength => 255, :placeholder => t('post.max-comment') %>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="text-right">
-                                    <button type="submit" id="submitComment" data-no-turbolink="true" class="btn btn-primary">Submit</button>
+                                    <button type="submit" id="submitComment" data-no-turbolink="true" class="btn btn-primary"><%= t('post.comment') %></button>
                                 </div>
                             </div>
                         </section>

@@ -31,13 +31,13 @@
             <div class="col">
                 <div class="user-info">
                     <span class="user-name">
-                        <strong>User: <%= current_user.name %></strong>
+                        <strong><%= t('homepage.username') + ":"%> <%= current_user.name %></strong>
                     </span>
                     <span class="user-name">
                         <% if current_user.is_admin %>
-                            <strong>Role: Admin</strong>
+                            <strong><%= t('homepage.role')%> : <%= t('homepage.admin') %></strong>
                         <% else %>
-                            <strong>Role: User</strong>
+                            <strong><%= t('homepage.role')%> : <%= t('homepage.role')%></strong>
                         <% end %>
                     </span>
                 </div>
@@ -47,36 +47,36 @@
             <ul>
                 <% # General %>
                 <li class="header-menu">
-                    <span>General</span>
+                    <span><%= t('homepage.general')%></span>
                 </li>
                 <li class="sidebar-dropdown">
                     <%= link_to(user_path(current_user)) do %>
                         <i class="fa fa-tachometer"></i>
-                        <span>Dashboard</span>
+                        <span><%= t('homepage.dashboard')%></span>
                     <% end %>
                 </li>
                 
                 <% if current_user.is_admin %>
                     <% # User %>
                     <li class="header-menu">
-                        <span>User</span>
+                        <span><%= t('homepage.user')%></span>
                     </li>
                     <li class="sidebar-dropdown">
                         <%= link_to("/users") do %>
                             <i class="fa fa-users"></i>
-                            <span>List User</span>
+                            <span><%= t('homepage.list-user')%></span>
                         <% end %>
                     </li>
                 <% end %>
 
                 <% # Post %>
                 <li class="header-menu">
-                    <span>Post</span>
+                    <span><%= t('homepage.post')%></span>
                 </li>
                 <li class="sidebar-dropdown">
                     <%= link_to("/posts") do %>
                         <i class="fa fa-list"></i>
-                        <span>List post</span>
+                        <span><%= t('homepage.list-post')%></span>
                     <% end %>
                 </li>
 
@@ -84,25 +84,25 @@
                     <li class="sidebar-dropdown">
                         <%= link_to(new_post_path) do %>
                             <i class="fa fa-plus-circle"></i>
-                            <span>Add post</span>
+                            <span><%= t('homepage.add-post')%></span>
                         <% end %>
                     </li>
                 <% end %>
 
                 <% # Setting %>
                 <li class="header-menu">
-                    <span>Setting</span>
+                    <span><%= t('homepage.setting')%></span>
                 </li>
                 <li class="sidebar-dropdown">
                     <%= link_to(edit_user_path(current_user)) do %>
                         <i class="fa fa-user"></i>
-                        <span>Profile</span>
+                        <span><%= t('homepage.profile')%></span>
                     <% end %>
                 </li>
                 <li class="sidebar-dropdown">
                     <%= link_to (logout_path), method: :delete do %>
                         <i class="fa fa-sign-out"></i>
-                        <span>Sign Out</span>
+                        <span><%= t('homepage.signout')%></span>
                     <% end %>
                 </li>
             </ul>

@@ -1,5 +1,5 @@
 <% content_for :content do %>
-  <div class="title">Add Post</div>
+  <div class="title"><%= t('post.add')%></div>
   <div class="cotainer">
     <div class="row justify-content-center">
       <div class="col-md-8">
@@ -16,7 +16,7 @@
                 <% end %>
 
                 <%#  Title %>
-                <div class="answer">Title post</div>
+                <div class="answer"><%= t('post.title')%></div>
                 <div class="form-group row">
                     <%= form.label :title, :class => "col-md-4 col-form-label text-md-right text-white" %>
                     <div class="col-md-6">
@@ -25,7 +25,7 @@
                 </div>
 
                 <%#  Answer %>
-                <div class="answer">Answer</div>
+                <div class="answer"><%= t('post.answer')%></div>
                 <div class="form-group row">
                     <%= form.label :title, :class => "col-md-4 col-form-label text-md-right text-white" %>
                     <div class="col-md-6">
@@ -40,7 +40,7 @@
                 
                 <%# Edit post %>
                 <div class="col-md-6 offset-md-4">
-                    <%= form.button "Submit", :class => "btn btn-primary" %>
+                    <%= form.button t('post.save'), :class => "btn btn-primary" %>
                 </div>
             <% end %>
           </div>

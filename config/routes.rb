@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # scope '(:locale)', locale: /en|vi/ do
+  scope '(:locale)', locale: /en|vi/ do
     get '/login', to: 'authens#new'
     post '/login', to: 'authens#create'
     delete '/logout', to: 'authens#destroy'
@@ -15,3 +15,4 @@ Rails.application.routes.draw do
 
     resources :users, :posts, :comments
   end
+end

@@ -17,7 +17,7 @@
 
                             <%# Password %>
                             <div class="form-group row">
-                                <%= form.label :password, "Password: ", :class => "col-md-4 col-form-label text-md-right" %>
+                                <%= form.label :password, t('master.password')+":", :class => "col-md-4 col-form-label text-md-right" %>
                                 <div class="col-md-6">
                                     <%= form.password_field :password, :class => "form-control", :required => true %>
                                 </div>
@@ -37,7 +37,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     <%= t('master.login') %>
                                 </button>
-                                <%= link_to "Forgot password", password_resets_new_path, :class => "btn btn-link" %>
+                                <%= link_to t('master.forgot_password')+"?", password_resets_new_path, :class => "btn btn-link" %>
                             </div>
                         <% end %>
                     </div>

@@ -1,15 +1,7 @@
 class User < ApplicationRecord
-  has_many :active_relationships, class_name: "Relationship",
-                                  foreign_key: "follower_id",
-                                  dependent: :destroy
-  has_many :passive_relationships, class_name: "Relationshi",
-                                   foreign_key: "followed_id",
-                                   dependent: :destroy
-  has_many :following, through: :active_relationships, source: :followed
-  has_many :followers, through: :passive_relationships, source: :follower
-  has_many :comments
-  has_many :posts
-  has_many :result_votes
+  has_many :comments, dependent: :destroy
+  has_many :posts, dependent: :destroy
+  has_many :result_votes, dependent: :destroy
   has_many :relationships, :foreign_key => "follower_id",
                            :dependent => :destroy
 
@@ -25,6 +17,19 @@ class User < ApplicationRecord
   validate :add_error_confirm_password, on: :update, if: :password_changed?
 
   has_secure_password
+  acts_as_paranoid
+
+  CSV_ATTRIBUTES = %w(name email created_at updated_at deleted_at).freeze
+
+  def self.as_csv
+    attributes = %w(name email created_at updated_at deleted_at)
+    CSV.generate do |csv|
+      csv << attributes
+      all.each do |item|
+        csv << item.attributes.values_at(*attributes)
+      end
+    end
+  end
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

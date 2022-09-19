@@ -38,9 +38,8 @@ class PasswordResetsController < ApplicationController
         begin
             @user = get_user
             @user.attributes = user_params
-            @messages = @user.valid_attributes?(:password)
 
-            if @messages.none? && @user.save(:validate => false)
+            if @user.save
               flash[:success] = 'Password change success!!'   
               redirect_to login_path   
             end

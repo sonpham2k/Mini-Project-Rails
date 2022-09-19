@@ -13,7 +13,6 @@
           </div>
       </div>
     <% end %>
-
     <div class="main-container table-responsive py-5"> 
         <table class="table table-bordered table-hover">
             <thead class="thead-dark">
@@ -40,6 +39,7 @@
                 <% end %>
             </tbody>
         </table>
+        <%= link_to "Export CSV", export_users_path(format: :csv), :class => "btn btn-primary btn-right" %>
         <div class="d-flex justify-content-center">
           <%= will_paginate @clients, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
         </div>

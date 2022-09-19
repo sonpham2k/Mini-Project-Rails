@@ -25,7 +25,7 @@ vi:
     general: 'Chung'
     dashboard: 'Bảng điều khiển'
     user: 'Người dùng'
-    list-user: 'Dang sách người dùng'
+    list-user: 'Danh sách người dùng'
     post: 'Bài đăng'
     list-post: 'Danh sách bài đăng'
     add-post: 'Thêm bài đăng'
@@ -46,7 +46,7 @@ vi:
     save: 'Lưu'
     new: 'Mới'
     old: 'Cũ'
-    list-user: 'Dang sách người dùng'
+    list-user: 'Danh sách người dùng'
     name: 'Tên người dùng'
     action: 'Hành động'
     edit: 'Sửa'
@@ -55,7 +55,7 @@ vi:
     really: 'Bạn có chắc muốn xóa người dùng này?'
   
   post:
-    list-post: 'Dang sách bài đăng'
+    list-post: 'Danh sách bài đăng'
     edit: 'Sửa'
     delete: 'Xóa'
     search: 'Tìm kiếm theo tựa đề bài đăng'
@@ -70,3 +70,4 @@ vi:
     close: 'Đóng'
     max-comment: 'Tối đa 255 kí tự..'
     add: 'Thêm bài đăng'
+    ago: 'trước'

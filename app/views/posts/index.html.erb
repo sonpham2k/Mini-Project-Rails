@@ -1,0 +1,33 @@
+<% content_for :content do %>
+    <div class="title"><%= t('post.list-post') %></div>
+    <%= form_tag(posts_path, method: :get) do %>
+      <div class="main">
+          <div class="input-group"> 
+            <% # Search %>
+            <%= text_field_tag(:search, "", :class => "form-control", :placeholder => t('post.search')) %>
+            <div class="input-group-append">
+              <%= button_tag(type: "submit", class: "btn btn-primary") do %>
+                  <i class="fa fa-search"></i>
+              <% end %>
+            </div>
+          </div>
+      </div>
+    <% end %>
+    <div class="main-container">
+      <ul class="grid-wrapper">
+        <% @posts.each do |post| %>
+          <li class="post-list">
+            <% # <i class="fa fa-ellipsis-v icon-trash"></i> %>
+            <% if current_user.is_admin %>
+              <%= link_to t('post.edit'), edit_post_path(post.id) %>
+              <%= link_to t('post.delete'), post, method: :delete, data: { confirm: t('post.really') }, :class => "delete" %>
+            <% end %>
+            <%= link_to post.title, post_path(post.id), :class => "span-break" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="d-flex justify-content-center">
+      <%= will_paginate @clients, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+    </div>  
+<% end %>

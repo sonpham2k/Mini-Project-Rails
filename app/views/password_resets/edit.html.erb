@@ -1,0 +1,51 @@
+<% content_for :content do %>
+<main class="login-form">
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header"><%= t('master.change-password') %></div>
+                    <div class="card-body">
+                        <%= form_with(model: @user, method: :post, scope: :user, url: password_resets_update_path, local: true) do |form| %> 
+                            
+                            <% if @user.errors.any? %>
+                                <ul>
+                                    <% @user.errors.full_messages.each do |message| %>
+                                        <li><%= message %></li>
+                                    <% end %>
+                                </ul>
+                            <% end %>
+                            
+                            <%= hidden_field_tag :email, @user.email %>
+                    
+                            <%# Password %>
+                            <div class="form-group row">
+                                <%=  form.label :password, 'Password', :class => "col-md-4 col-form-label text-md-right" %>
+                                <div class="col-md-6">
+                                    <%= form.password_field :password, :class => "form-control", :required => true %>
+                                </div>
+                            </div>
+
+							<%# Confirm Password %>
+                            <div class="form-group row">
+                                <%=  form.label :password_confirmation, 'Confirm Password', :class => "col-md-4 col-form-label text-md-right" %>
+                                <div class="col-md-6">
+                                    <%= form.password_field :password_confirmation, :class => "form-control", :required => true %>
+                                </div>
+                            </div>
+
+                            <%# change %>
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    <%= t('master.change-password') %>
+                                </button>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</main>
+<% end %>

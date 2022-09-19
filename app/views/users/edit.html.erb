@@ -1,0 +1,90 @@
+<% content_for :content do %>
+<div class=" title"><%= t('user.edit-profile') %></div>
+<div class="cotainer">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <%= form_for(@user) do |form| %>
+                    <% if @user.errors.any? %>
+                    <ul>
+                        <% @user.errors.full_messages.each do |message| %>
+                            <li><%= message %></li>
+                        <% end %>
+                    </ul>
+                    <% end %>
+                    <% # Username %>
+                    <div class="form-group row">
+                        <%= form.label :name, t('user.username')+":", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
+                        <div class="col-md-6">
+                            <%= form.text_field :name, :class => "form-control", :value => @user.name %>
+                        </div>
+                    </div>
+                    <% # Email %>
+                    <div class="form-group row">
+                        <%= form.label :email, "Email: ", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
+                        <div class="col-md-6">
+                            <%= form.text_field :email, :class => "form-control", :value => @user.email %>
+                        </div>
+                    </div>
+                    <% # Role %>
+                    <div class="form-group row">
+                        <%= form.label :role, t('user.role')+":", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
+                        <div class="col-md-6">
+                            <%= form.text_field :role, :class => "form-control", :disabled => true, :value => @user.is_admin ? "Admin" : "User" %>
+                        </div>
+                    </div>
+                    <% if current_user.id == @user.id %>
+                        <% # Current User %>
+                        <div class="form-group row">
+                            <%= form.label :current_password, t("master.current-password")+":", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
+                            <div class="col-md-6">
+                                <%= form.password_field :current_password, :class => "form-control" %>
+                            </div>
+                        </div>
+                        <% # Password %>
+                        <div class="form-group row">
+                            <%= form.label :password, t("master.new-password")+":", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
+                            <div class="col-md-6">
+                                <%= form.password_field :password, :class => "form-control" %>
+                            </div>
+                        </div>
+                        <% # Confirm Password %>
+                        <div class="form-group row">
+                            <%= form.label :password_confirmation, t("master.confirm-password")+":", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
+                            <div class="col-md-6">
+                                <%= form.password_field :password_confirmation, :class => "form-control" %>
+                            </div>
+                        </div>
+                    <% end %>
+
+                    <% # Avatar %>
+                    <div class="form-group row">
+                        <%= form.label :avatar, t("user.avatar")+":", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
+                            <div class="col-md-6">
+                                <span class="file-input btn btn-primary btn-file">
+                                    <%= t("user.choosen") %> <%= form.file_field :avatar, :class => "choosen-avatar" %>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                            <img id="target" class="size-image-edit-new">
+                            <%= t('user.new')%>
+                        <% if current_user.avatar.attached? %>
+                            <%= image_tag current_user.avatar, :id => "user_avatar_upload", :class => "size-image-edit-old" %>
+                            <%= t('user.old')%>
+                        <% end %>
+                    </div>
+
+                    <% # Save %>
+                    <div class="col-md-6 offset-md-4">
+                        <%= form.button t('user.save'), :class => "btn btn-primary" %>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>

@@ -21,20 +21,23 @@
                       <%= link_to t('master.login'), "/login", class: "navbar-brand" %>
                   </li>
                   <li class="nav-item">
-                      <%= link_to t('master.register'), "/register", class: "navbar-brand" %>
-                  </li>
-                  <li class="nav-item">
-                      <%= link_to t('master.logout'), "/logout", class: "navbar-brand" %>
+                      <%= link_to t('master.register'), "/users/new", class: "navbar-brand" %>
                   </li>
               </ul>
           </div>
       </div>
     </nav>
 
-    <%= yield :login %>
-    <%= yield :register %> 
-    <%= yield :change_password %> 
-    <%= yield :forgot_password %> 
+    <section class="content">
+      <% flash.each do |key, value| %>
+        <div class="row">
+          <div class="alert alert-<%= key %>  master-center">
+            <%= value %>
+          </div>
+        </div>
+      <% end %>
+    </section>
+    <%= yield :content %>
 
   </body>
 </html>

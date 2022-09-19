@@ -1,0 +1,71 @@
+<% content_for :content do %>
+<main class="login-form">
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header"><%= t('master.register') %></div>
+                      <div class="card-body">
+                        <%= form_for @user do |form| %>
+                            <% if @user.errors.any? %>
+                                <ul>
+                                    <% @user.errors.full_messages.each do |message| %>
+                                        <li><%= message %></li>
+                                    <% end %>
+                                </ul>
+                            <% end %>
+
+                            <%# Username %>
+                            <div class="form-group row">
+                                <%= form.label :name, t('user.username')+":", :class => "col-md-4 col-form-label text-md-right"%>
+                                <div class="col-md-6">
+                                    <%= form.text_field :name, :class => "form-control"%>
+                                </div>
+                            </div>
+
+                            <%# Email %>
+                            <div class="form-group row">
+                                <%= form.label :email, "Email: ", :class => "col-md-4 col-form-label text-md-right"%>
+                                <div class="col-md-6">
+                                    <%= form.text_field :email, :class => "form-control"%>
+                                </div>
+                            </div>
+
+                            <%# Password %>
+                            <div class="form-group row">
+                                <%= form.label :password, t('user.password')+":", :class => "col-md-4 col-form-label text-md-right"%>
+                                <div class="col-md-6">
+                                    <%= form.password_field :password, :class => "form-control"%>
+                                </div>
+                            </div>
+
+                            <%# Repeat Password %>
+                            <div class="form-group row">
+                                <%= form.label :password_confirmation, t('user.confirm-password')+":", :class => "col-md-4 col-form-label text-md-right"%>
+                                <div class="col-md-6">
+                                    <%= form.password_field :password_confirmation, :class => "form-control"%>
+                                </div>
+                            </div>
+
+                            <%# Avatar %>
+                            <div class="form-group row">
+                                <%= form.label :avatar, t('user.avatar')+":", :class => "col-md-4 col-form-label text-md-right"%>
+                                <div class="col-md-6">
+                                    <%= form.file_field :avatar, :class => "choosen-avatar" %>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    <%= t('master.register') %>
+                                </button>
+                            </div>
+                          <% end %>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</main>
+<% end %>

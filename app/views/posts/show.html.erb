@@ -1,0 +1,169 @@
+<% content_for :content do %>
+<%= form_with(model: @comment, url: comment_url, id: "comment", method: :patch, local: true) do |form| %>
+<div class="modal fade" id="modal-edit-comment" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><%= t('post.edit') %></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="form-group">
+                <%= form.text_area :content_comment, :id => "edit_content_comment", :class => "form-control", :maxlength => 255 %>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('post.close') %></button>
+                <button type="submit" id="submitComment" class="btn btn-primary"><%= t('post.save') %></button>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>
+<div class="title"><%= t('post.detail') %></div>
+<div class="cotainer">
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <%= form_with(model: @post, url: post_contents_update_post_url, id: "vote", method: :post, local: true) do |form| %>
+                <% if @post.errors.any? %>
+                <ul>
+                    <% @post.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                    <% end %>
+                </ul>
+                <% end %>
+                <% #  Title %>
+                <div class="answer"><%= t('post.title') %></div>
+                <div class="form-group row">
+                    <%= form.label :title, :class => "col-md-4 col-form-label text-md-right text-white" %>
+                    <div class="col-md-6">
+                        <%= form.text_area :title, :class => "form-control", :required => true, :disabled => true %>
+                    </div>
+                </div>
+                <% #  Answer %>
+                <div id="answerVote" class="answer"><%= t('post.answer') %></div>
+                <ul class="remove-dot-ul" id="answer">
+                    <% @post.post_contents.each do |post_content| %>
+                    <li>
+                        <div class="form-group row comment">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col check-box"> 
+                                        <% count = 0 %>
+                                        <% @user.result_votes.each do |vote| %>
+                                        <% if vote.post_content_id == post_content.id %>
+                                        <% count = count + 1 %>
+                                        <% end %>
+                                        <% end %>
+                                        <% if count == 0 %>
+                                        <input type="checkbox" name="content[]" value="1" post_content_id="<%= post_content.id %>" class="vote-checkbox">
+                                        <% else %>
+                                        <input type="checkbox" name="content[]" checked value="1" post_content_id="<%= post_content.id %>" class="vote-checkbox">
+                                        <% end %>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-control size-text-field" disabled="disabled" type="text" name="content" id="content" value="<%= post_content.content %>">
+                                        <i class="fa fa-eye fa-2x" data-toggle="modal" data-target="#modalVote-<%= post_content.id %>" aria-hidden="true"></i> <%= post_content.result_votes.count() %> Voted
+                                    </div>
+                                    <% # Modal %>
+                                    <div class="modal fade" id="modalVote-<%= post_content.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title"><%= t('post.list-user-vote') %></h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <% post_content.result_votes.each do |user| %> 
+                                                <div class="modal-body border-list-user ">
+                                                    <%= image_tag user.user.avatar, :class => "size-image-list" %>
+                                                    <%= user.user.name %>
+                                                </div>
+                                                <% end %>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('post.close') %></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% # end %>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <% end %>
+                </ul>
+                <% # Save %>
+                <div>
+                    <button type="submit" id="submitVote" class="btn btn-primary button-save-vote-post"><%= t('post.save-vote') %></button>
+                </div>
+                <% end %>
+                <% # Comment %>
+                <%= form_with(model: @comment, url: comments_url, id: "comment", method: :post, local: true) do |form| %>
+                <input type="hidden" id="post_id" name="post_id" value="<%= @post.id %>">
+                <input type="hidden" id="user_id" name="user_id" value="<%= current_user.name %>">
+                <div class="div-comment">
+                    <div class="container-fluid my-5">
+                        <div class="left">
+                            <h3><%= t('post.comment') %> (<%= @post.comments.count() %>)</h3>
+                        </div>
+                        <% @post.comments.each do |comment| %>
+                        <section>
+                            <div id="grid">
+                                <div id="image">
+                                    <%= image_tag comment.user.avatar, :class => "size-image-comment" %>
+                                </div>
+                                <div id="detail-comment">
+                                    <div class="border p-2 mt-3">
+                                        <div class="row m-0">
+                                            <div class="flex-grow-1 pl-1">
+                                                <a class="text-decoration-none">
+                                                    <h2 class="text-capitalize h5 mb-0">
+                                                        <%= comment.user.name.to_s %>
+                                                    </h2>
+                                                </a>
+                                                <p class="small text-secondary m-0 mt-1"><%= comment.count_time_comment %> <%= t('post.ago') %></p>
+                                            </div>
+                                            <% if comment.user_id == current_user.id %>
+                                            <a onclick="openModelEditComment('<%= comment.content_comment %>','<%= comment_path(comment.id) %>')" class="edit_comment" aria-hidden="true"><%= t('post.edit') %></a>
+                                            <%= link_to t('post.delete'), comment, method: :delete, data: { confirm: t('post.really') }, :class => "delete" %>
+                                            <% end %>
+                                            <% # Modal %>
+                                        </div>
+                                        <div class="">
+                                            <p class="my-2">
+                                                <%= comment.content_comment %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                        </section>
+                        <% end %>
+                        <div id="list_comment">
+                        </div>
+                        <section>
+                            <div class="card-body">
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                                        <div class="form-group">
+                                            <%= form.text_area :content_comment, :class => "form-control", :required => true, :maxlength => 255, :placeholder => t('post.max-comment') %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <button type="submit" id="submitComment" data-no-turbolink="true" class="btn btn-primary"><%= t('post.comment') %></button>
+                                </div>
+                            </div>
+                        </section>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>

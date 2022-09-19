@@ -3,7 +3,6 @@ class CreateResultVotes < ActiveRecord::Migration[5.2]
     create_table :result_votes do |t|
       t.integer :content_id
       t.integer :user_id
-      t.integer :post_id
 
       t.timestamps
       t.datetime :deleted_at

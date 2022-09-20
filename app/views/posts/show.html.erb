@@ -79,7 +79,9 @@
                                                 </div>
                                                 <% post_content.result_votes.each do |user| %> 
                                                 <div class="modal-body border-list-user ">
-                                                    <%= image_tag user.user.avatar, :class => "size-image-list" %>
+                                                    <% if user.user.avatar.attached? %>
+                                                        <%= image_tag user.user.avatar, :class => "size-image-list" %>
+                                                    <% end %>
                                                     <%= user.user.name %>
                                                 </div>
                                                 <% end %>
@@ -114,7 +116,9 @@
                         <section>
                             <div id="grid">
                                 <div id="image">
-                                    <%= image_tag comment.user.avatar, :class => "size-image-comment" %>
+                                    <% if comment.user.avatar.attached? %>
+                                        <%= image_tag comment.user.avatar, :class => "size-image-comment" %>
+                                    <% end %>
                                 </div>
                                 <div id="detail-comment">
                                     <div class="border p-2 mt-3">

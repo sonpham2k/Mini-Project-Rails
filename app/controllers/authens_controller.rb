@@ -17,7 +17,7 @@ class AuthensController < ApplicationController
             log_in user
             return redirect_to user
         end
-        flash[:danger] = "Invalid email/password combination"
+        flash[:error] = "Invalid email/password combination"
         redirect_to login_path
     end
 

@@ -15,6 +15,9 @@ gem 'csv'
 #time
 gem 'time_difference'
 
+# toast
+gem 'toastr-rails'
+
 #file:gem
 gem 'file_validators'
 

@@ -18,7 +18,7 @@ class PasswordResetsController < ApplicationController
               flash[:info] = "Email sent with password reset instructions"
               render 'success'
             end
-            flash.now[:danger] = "Email address not found"
+            flash.now[:error] = "Email address not found"
             render 'new'
         rescue Exception => e
             logger.info e
@@ -38,12 +38,11 @@ class PasswordResetsController < ApplicationController
         begin
             @user = get_user
             @user.attributes = user_params
-
             if @user.save
               flash[:success] = 'Password change success!!'   
-              redirect_to login_path   
+              return redirect_to login_path   
             end
-            flash[:danger] = 'Password change fails!!'   
+            flash[:error] = 'Password change fails!!'   
             render 'edit'
         rescue Exception => e
             logger.info e

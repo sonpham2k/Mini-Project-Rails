@@ -75,8 +75,10 @@ class User < ApplicationRecord
   end
 
   def add_error_current_password
-    if User.find($params[:id]).authenticate(password_params[:current_password]) == false
-      errors.add(:current_password, " fail")
+    if ($params[:id] != nil)
+      if User.find($params[:id]).authenticate(password_params[:current_password]) == false
+        errors.add(:current_password, " fail")
+      end
     end
   end
 

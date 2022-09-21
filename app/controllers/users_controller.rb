@@ -21,7 +21,7 @@ class UsersController < ApplicationController
         return redirect_to login_path
       end
 
-      flash[:danger] = "Register failed"
+      flash[:error] = "Register failed"
       render "new"
     rescue Exception => e
       logger.info e
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
         flash[:success] = "Update profile success!"
         return redirect_to edit_user_path
       end
-      flash[:danger] = "Update profile fails!"
+      flash[:error] = "Update profile fails!"
       render "edit"
     rescue Exception => e
       logger.info e

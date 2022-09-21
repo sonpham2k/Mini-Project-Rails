@@ -4,6 +4,8 @@
 
 @import "font-awesome";
 
+@import 'toastr';
+
 body {
   margin: 0;
   font-size: .9rem;
@@ -1064,4 +1066,12 @@ input[readonly] {
 
 .edit_comment {
   cursor: pointer;
+}
+
+.text-new {
+  margin-left: 39%;
+}
+
+.text-old {
+  margin-left: 20%;
 }

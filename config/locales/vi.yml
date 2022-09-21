@@ -20,7 +20,7 @@ vi:
 
   homepage:
     username: 'Tên đăng nhập'
-    role: 'Vai trò'
+    role: 'Người dùng'
     admin: 'Quản trị viên'
     general: 'Chung'
     dashboard: 'Bảng điều khiển'

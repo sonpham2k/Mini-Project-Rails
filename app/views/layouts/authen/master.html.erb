@@ -4,9 +4,9 @@
     <title>Mini Project Rails</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= custom_bootstrap_flash %>
   </head>
 
   <body>
@@ -28,16 +28,17 @@
       </div>
     </nav>
 
+    <%= yield :content %>
     <section class="content">
-      <% flash.each do |key, value| %>
-        <div class="row">
-          <div class="alert alert-<%= key %>  master-center">
-            <%= value %>
-          </div>
-        </div>
+      <% if flash.any? %>
+        <script type="text/javascript">
+          <% flash.each do |key, value| %>
+            <% type = key.to_s.gsub('alert', 'error').gsub('notice', 'success') %>
+            toastr.<%= type %>('<%= value %>')
+          <% end %>
+        </script>
       <% end %>
     </section>
-    <%= yield :content %>
 
   </body>
 </html>

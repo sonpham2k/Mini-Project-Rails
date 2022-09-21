@@ -29,7 +29,7 @@ class PostsController < ApplicationController
         flash[:success] = "Add post success"
         return redirect_to posts_path
       end
-      flash[:danger] = "Add post failed"
+      flash[:error] = "Add post failed"
       return render "new"
     rescue Exception => e
       logger.info e
@@ -68,7 +68,7 @@ class PostsController < ApplicationController
         flash[:success] = "Update post success"
       end
 
-      flash[:danger] = "Update post failed"
+      flash[:error] = "Update post failed"
       return render "edit"
     rescue Exception => e
       logger.info e

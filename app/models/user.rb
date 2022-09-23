@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :result_votes, dependent: :destroy
   has_many :relationships, :foreign_key => "follower_id",
                            :dependent => :destroy
-
+  # scope :get_list_user, ->(id) {where(reset_digest: id)}
   validates :name, presence: true, length: { maximum: 255 }, on: :create
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true,

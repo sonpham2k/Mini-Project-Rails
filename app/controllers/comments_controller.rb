@@ -1,12 +1,14 @@
 class CommentsController < ApplicationController
+  include PostRepository
+
   layout "homepages/master"
 
   def create
     begin
-      @post = Post.includes(:comments).find_by(id: params[:post_id])
-      @comment = Comment.new comment_params
+      @post = repo.find(Post, params[:post_id])
+      @comment = repo.new(Comment, comment_params)
       @comment.user_id = current_user.id
-      @comment.save
+      repo.save(@comment)
       flash[:success] = "Add comment success!"
       return redirect_to post_path(@post)
     rescue Exception => e
@@ -15,15 +17,15 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    @comment = Comment.find(params[:id])
+    @comment = repo.find(Comment, params[:id])
   end
 
   def update
     begin
-      @comment = Comment.find_by id: params[:id]
+      @comment = repo.find(Comment, params[:id])
       @post = @comment.post
       @comment.attributes = content_comment_params
-      @comment.save
+      repo.save(@comment)
       flash[:success] = "Edit comment success!"
       return redirect_to post_path(@post)
     rescue Exception => e
@@ -33,9 +35,9 @@ class CommentsController < ApplicationController
 
   def destroy
     begin
-      @comment = Comment.includes(:post).find(params[:id])
+      @comment = repo.find(Comment, params[:id])
       @post = @comment.post
-      @comment.destroy
+      repo.delete(@comment)
       flash[:success] = "Delete comment success!"
       return redirect_to post_path(@post)
     rescue Exception => e
@@ -53,5 +55,9 @@ class CommentsController < ApplicationController
 
   def content_comment_params
     params.permit :content_comment
+  end
+
+  def repo
+    @repo ||= PostRepository.new
   end
 end

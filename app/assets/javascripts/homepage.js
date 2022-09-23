@@ -3,6 +3,8 @@
 //= require popper
 //= require bootstrap
 //= require toastr
+//= require chartkick
+//= require Chart.bundle
 
 //Add comment
 var main = function () {

@@ -6,7 +6,9 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.boolean :is_admin, :default => false
       t.string :password_digest
       t.string :reset_digest
-
+      t.float :latitude
+      t.float :longitude
+      
       t.timestamps
       t.datetime :deleted_at
     end

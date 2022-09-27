@@ -1,4 +1,7 @@
 class PostContentsController < ApplicationController
+  include PostRepository
+  include ResultVoteRepository
+
   layout "homepages/master"
 
   def update_post
@@ -8,8 +11,8 @@ class PostContentsController < ApplicationController
       results_unvote = []
       items_vote = []
       check = ""
-      @post = Post.find_by id: params[:id]
-      @user = User.includes(:result_votes).find_by(id: current_user.id)
+      @post = repoPost.find(Post, params[:id])
+      @user = repoPost.find(User, current_user.id)
       if !params[:post_vote_ids].nil?
         params[:post_vote_ids].split(",").each do |post_remove_ids|
           items_vote.push post_remove_ids
@@ -35,10 +38,10 @@ class PostContentsController < ApplicationController
       end
 
       if !@vote_list.nil?
-        ResultVote.create(results_vote)
+        repoResultVote.create(ResultVote, results_vote)
       end
       if !results_unvote.empty?
-        ResultVote.destroy(results_unvote)
+        repoResultVote.delete(results_unvote)
       end
       flash[:success] = "Vote success"
       return redirect_to post_path
@@ -51,5 +54,13 @@ class PostContentsController < ApplicationController
 
   def post_params
     params.require(:post).permit :title
+  end
+
+  def repoPost
+    @repoPost ||= PostRepository.new
+  end
+
+  def repoResultVote
+    @repoResultVote ||= ResultVoteRepository.new
   end
 end

@@ -17,8 +17,7 @@
       <ul class="grid-wrapper">
         <% @posts.each do |post| %>
           <li class="post-list">
-            <% # <i class="fa fa-ellipsis-v icon-trash"></i> %>
-            <% if current_user.is_admin %>
+            <% if can? :destroy, post %>
               <%= link_to t('post.edit'), edit_post_path(post.id) %>
               <%= link_to t('post.delete'), post, method: :delete, data: { confirm: t('post.really') }, :class => "delete" %>
             <% end %>

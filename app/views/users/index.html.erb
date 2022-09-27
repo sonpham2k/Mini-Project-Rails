@@ -1,18 +1,19 @@
 <% content_for :content do %>
     <div class="title"><%= t('user.list-user')%></div>
-    <%= form_tag(users_path, method: :get) do %>
+    <%= search_form_for @q do |f| %>
       <div class="main">
           <div class="input-group"> 
             <% # Search %>
-            <%= text_field_tag(:search, "", :class => "form-control", :placeholder => t('user.search')) %>
+            <%= f.search_field :name_or_email_cont, :class => "form-control", :placeholder => t('user.search') %>
             <div class="input-group-append">
-              <%= button_tag(type: "submit", class: "btn btn-primary") do %>
+              <%= f.submit :class => "btn btn-primary", :style => "background-color: #007bff" do %>
                   <i class="fa fa-search"></i>
               <% end %>
             </div>
           </div>
       </div>
     <% end %>
+    <%# <%= area_chart Comment.group(:user_id).count %>
     <div class="main-container table-responsive py-5"> 
         <table class="table table-bordered table-hover">
             <thead class="thead-dark">

@@ -12,11 +12,24 @@ gem "paranoia", "~> 2.2"
 #csv
 gem 'csv'
 
+#ransack
+gem "ransack"
+
 #time
 gem 'time_difference'
 
 # toast
 gem 'toastr-rails'
+
+# cancan
+gem 'cancancan'
+
+#devise
+gem 'devise'
+
+#chart
+gem "chartkick"
+gem "groupdate"
 
 #file:gem
 gem 'file_validators'

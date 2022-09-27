@@ -57,7 +57,7 @@
                     <% end %>
                 </li>
                 
-                <% if current_user.is_admin %>
+                <% if can? :read, User %>
                     <% # User %>
                     <li class="header-menu">
                         <span><%= t("homepage.user") %></span>
@@ -81,14 +81,12 @@
                     <% end %>
                 </li>
 
-                <% if current_user.is_admin %>
-                    <li class="sidebar-dropdown">
-                        <%= link_to(new_post_path) do %>
-                            <i class="fa fa-plus-circle"></i>
-                            <span><%= t("homepage.add-post") %></span>
-                        <% end %>
-                    </li>
-                <% end %>
+                <li class="sidebar-dropdown">
+                    <%= link_to(new_post_path) do %>
+                        <i class="fa fa-plus-circle"></i>
+                        <span><%= t("homepage.add-post") %></span>
+                    <% end %>
+                </li>
 
                 <% # Setting %>
                 <li class="header-menu">

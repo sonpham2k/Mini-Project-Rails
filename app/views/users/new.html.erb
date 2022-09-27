@@ -49,10 +49,16 @@
 
                             <%# Avatar %>
                             <div class="form-group row">
-                                <%= form.label :avatar, t('user.avatar')+":", :class => "col-md-4 col-form-label text-md-right"%>
-                                <div class="col-md-6">
-                                    <%= form.file_field :avatar, :class => "choosen-avatar" %>
+                                <%= form.label :avatar, t("user.avatar")+":", :class => "col-md-4 col-form-label text-md-right label_add_post" %>
+                                    <div class="col-md-6">
+                                        <span class="file-input btn btn-primary btn-file">
+                                            <%= t("user.choosen") %> <%= form.file_field :avatar, :class => "choosen-avatar" %>
+                                        </span>
+                                    </div>
                                 </div>
+                            </div>
+                            <div class="form-group row">
+                                <img id="target" class="size-image-edit-new">
                             </div>
 
                             <div class="col-md-6 offset-md-4">

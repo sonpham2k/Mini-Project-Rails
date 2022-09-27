@@ -80,6 +80,8 @@ ActiveRecord::Schema.define(version: 2022_09_13_033452) do
     t.boolean "is_admin", default: false
     t.string "password_digest"
     t.string "reset_digest"
+    t.float "latitude"
+    t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"

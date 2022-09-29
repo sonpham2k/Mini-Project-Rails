@@ -42,7 +42,8 @@
         </table>
         <%= link_to "Export CSV", export_users_path(format: :csv), :class => "btn btn-primary btn-right" %>
         <div class="d-flex justify-content-center">
-          <%= will_paginate @clients, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+          <%= paginate @users %>
+          <%# <%= will_paginate @clients, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
         </div>
     </div>
 <% end %>

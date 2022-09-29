@@ -5,7 +5,8 @@ class PostsController < ApplicationController
   layout "homepages/master"
 
   def index
-    @posts = repoPost.search(params[:search], params[:page])
+    @q = Post.ransack(params[:q])
+    @posts = @q.result.paginate(page: params[:page], :per_page => 10)
   end
 
   def new

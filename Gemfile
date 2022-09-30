@@ -12,6 +12,10 @@ gem "paranoia", "~> 2.2"
 #csv
 gem 'csv'
 
+#activerecord-import
+gem 'roo'
+gem 'activerecord-import'
+
 #ransack
 gem "ransack"
 

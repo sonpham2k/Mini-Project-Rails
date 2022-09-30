@@ -77,6 +77,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def import
+    User.import_file params[:file]
+    redirect_to root_url, notice: "Data imported"
+  end
+  
   private
 
   def user_params

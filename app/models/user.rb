@@ -31,6 +31,20 @@ class User < ApplicationRecord
     end
   end
 
+  class << self
+    def import_file file
+      spreadsheet = Roo::Spreadsheet.open file
+      header = spreadsheet.row(1)
+      users = []
+      (2..spreadsheet.last_row).each do |i|
+        row = [header, spreadsheet.row(i)].transpose.to_h
+        user = new row
+        users << user
+      end
+      import! users
+    end
+  end
+
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
       BCrypt::Engine.cost

@@ -101,6 +101,11 @@ class PostsController < ApplicationController
     @user = repoPost.find(User, current_user.id)
   end
 
+  def import
+    Post.import_file params[:file]
+    redirect_to posts_url, notice: "Data imported"
+  end
+
   private
 
   def post_params

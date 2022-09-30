@@ -12,7 +12,10 @@ Rails.application.routes.draw do
 
     get 'password_resets/change_password'
     get 'password_resets/reset'
-
+    
     resources :users, :posts, :comments, :export_users
+    resources :posts do
+      collection {post :import}
+    end
   end
 end

@@ -12,6 +12,10 @@ gem "paranoia", "~> 2.2"
 #csv
 gem 'csv'
 
+#activerecord-import
+gem 'roo'
+gem 'activerecord-import'
+
 #ransack
 gem "ransack"
 
@@ -24,8 +28,14 @@ gem 'toastr-rails'
 # cancan
 gem 'cancancan'
 
+#pundit
+gem 'pundit'
+
 #devise
 gem 'devise'
+
+#kaminari
+gem 'kaminari'
 
 #chart
 gem "chartkick"
@@ -57,7 +67,8 @@ gem 'bcrypt', '3.1.13'
 #faker
 gem 'faker', '2.1.2'
 #paginate
-gem 'will_paginate-bootstrap4'
+# gem 'will_paginate-bootstrap4'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets

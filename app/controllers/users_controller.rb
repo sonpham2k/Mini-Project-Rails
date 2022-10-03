@@ -8,7 +8,14 @@ class UsersController < ApplicationController
   def index
     # abort User.get_list_user(nil).inspect (Scope)
     @q = User.ransack(params[:q])
-    @users = @q.result.paginate(page: params[:page], :per_page => 10)
+
+    # will_paginate
+    # @users = @q.result.paginate(page: params[:page], :per_page => 10)
+
+    #kaminari
+    @users = @q.result.page(params[:page])
+
+    # @user = User.all
   end
 
   def show
@@ -70,6 +77,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def import
+    User.import_file params[:file]
+    redirect_to root_url, notice: "Data imported"
+  end
+  
   private
 
   def user_params

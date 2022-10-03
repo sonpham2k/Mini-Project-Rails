@@ -1,12 +1,12 @@
 <% content_for :content do %>
     <div class="title"><%= t('post.list-post') %></div>
-    <%= form_tag(posts_path, method: :get) do %>
+    <%= search_form_for @q do |f| %>
       <div class="main">
           <div class="input-group"> 
             <% # Search %>
-            <%= text_field_tag(:search, "", :class => "form-control", :placeholder => t('post.search')) %>
+            <%= f.search_field :title_cont, :class => "form-control", :placeholder => t('user.search') %>
             <div class="input-group-append">
-              <%= button_tag(type: "submit", class: "btn btn-primary") do %>
+              <%= f.submit :class => "btn btn-primary", :style => "background-color: #007bff" do %>
                   <i class="fa fa-search"></i>
               <% end %>
             </div>
@@ -26,7 +26,15 @@
         <% end %>
       </ul>
     </div>
+    <div>
+      <h4>Import data</h4>
+      <%= form_tag import_posts_path, multipart: true do %>
+        <%= file_field_tag :file %>
+        <%= submit_tag "Import" %>
+      <% end %>
+    </div>
     <div class="d-flex justify-content-center">
-      <%= will_paginate @clients, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+      <%# <%= will_paginate @clients, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+      <%= paginate @posts %>
     </div>  
 <% end %>

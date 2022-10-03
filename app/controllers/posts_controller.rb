@@ -5,7 +5,8 @@ class PostsController < ApplicationController
   layout "homepages/master"
 
   def index
-    @posts = repoPost.search(params[:search], params[:page])
+    @q = Post.ransack(params[:q])
+    @posts = @q.result.page(params[:page])
   end
 
   def new
@@ -98,6 +99,11 @@ class PostsController < ApplicationController
   def show
     @post = repoPost.find(Post, params[:id])
     @user = repoPost.find(User, current_user.id)
+  end
+
+  def import
+    Post.import_file params[:file]
+    redirect_to posts_url, notice: "Data imported"
   end
 
   private

@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  db:
+    image: mysql:5.7
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+  app:
+    build: .
+    env_file: .env
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+volumes:
+  mysql-data:
